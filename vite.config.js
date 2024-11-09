@@ -5,8 +5,5 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: true,
-    emptyOutDir: true,
   },
 })
