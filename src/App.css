@@ -1,0 +1,351 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.resume-button {
+  background-color: #2a2a2a;
+  color: white;
+  border: 1px solid #333;
+  padding: 1rem 2.5rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.resume-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+  background-color: #333;
+}
+
+.profile-container {
+  position: relative;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circular-design {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.design-2 {
+  width: 300px;
+  height: 300px;
+}
+
+.design-3 {
+  width: 200px;
+  height: 200px;
+}
+
+.semi-circle {
+  position: absolute;
+  width: 500px;
+  height: 250px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 250px 250px 0 0;
+  top: 50%;
+  z-index: -1;
+}
+
+.decoration-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #2a2a2a;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.dot-1 {
+  top: 20%;
+  right: 15%;
+}
+
+.dot-2 {
+  bottom: 30%;
+  left: 10%;
+}
+
+.minus-symbol {
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #fff;
+  left: 15%;
+  top: 40%;
+}
+
+.profile-image {
+  width: 350px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.small-profile-circle {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+
+.portfolio-number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-section {
+  margin-top: 100px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-button {
+  position: relative;
+  z-index: 60;
+  transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+  transform: scale(1.05);
+}
+
+.menu-icon span {
+  transition: all 0.3s ease;
+}
+
+.menu-button:hover .menu-icon span:first-child {
+  transform: translateY(1px);
+}
+
+.menu-button:hover .menu-icon span:last-child {
+  transform: translateY(-1px);
+}
+
+/* Añade un efecto de desenfoque al fondo cuando el menú está abierto */
+.menu-overlay-active {
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(200px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(200px) rotate(-360deg);
+  }
+}
+
+/* Añade al final del archivo */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Para compensar el header fijo */
+}
+
+.nav-link {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Efecto de desenfoque cuando el menú está abierto */
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open main {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Estilos para la línea de tiempo en Education */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: -10%;
+    height: 120%;
+    width: 1px;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 15%,
+        rgba(255, 255, 255, 0.2) 85%,
+        transparent 100%
+    );
+    transform: translateX(-50%);
+}
+
+.timeline-dot {
+    position: relative;
+    z-index: 10;
+}
+
+.timeline-dot::before,
+.timeline-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 2rem;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.timeline-dot::before {
+    right: 100%;
+    margin-right: 0.5rem;
+}
+
+.timeline-dot::after {
+    left: 100%;
+    margin-left: 0.5rem;
+}
+
