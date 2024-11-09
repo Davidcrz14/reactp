@@ -28,7 +28,7 @@ function Portfolio() {
     {
       title: "DavGenerator",
       description: "Analizador de Pseudocódigo potenciado con IA Gemini 1.5, usando técnicas de Prompt Tuning para validaciones de código en formato Markdown",
-      image: "/code.jpg",
+      image: "/images/code.jpg",
       technologies: [
         { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
         { name: "Markdown", icon: <SiMarkdown className="text-[#000000]" /> },
@@ -44,7 +44,7 @@ function Portfolio() {
     {
       title: "DavcBot Extension",
       description: "Extensión de navegador para análisis de texto con IA Gemini Flash 1.5. Permite realizar preguntas sobre texto seleccionado",
-      image: "/cc.jpg",
+      image: "/images/cc.jpg",
       technologies: [
         { name: "Chrome API", icon: <SiGooglechrome className="text-[#4285F4]" /> },
         { name: "React", icon: <SiReact className="text-[#61DAFB]" /> }
@@ -59,7 +59,7 @@ function Portfolio() {
     {
       title: "ContaSync",
       description: "Aplicación móvil desarrollada con Flutter. Incluye sistema de login, dashboard, notificaciones y calendario",
-      image: "/app.png",
+      image: "/images/app.png",
       technologies: [
         { name: "Flutter", icon: <SiFlutter className="text-[#02569B]" /> },
         { name: "Firebase", icon: <SiFirebase className="text-[#FFCA28]" /> },
@@ -75,7 +75,7 @@ function Portfolio() {
     {
       title: "DavLoad",
       description: "Aplicación de escritorio para Windows que permite descargar videos de YouTube en formato de video o audio",
-      image: "/OIP.jpg",
+      image: "/images/OIP.jpg",
       technologies: [
         { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
         { name: "Windows", icon: <SiWindows className="text-[#0078D6]" /> },
@@ -91,7 +91,7 @@ function Portfolio() {
     {
       title: "Foro Simple",
       description: "Foro web con servidor Python y base de datos SQLite. Incluye sistema de usuarios y publicaciones",
-      image: "/foro.png",
+      image: "/images/foro.png",
       technologies: [
         { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
         { name: "SQLite", icon: <SiSqlite className="text-[#003B57]" /> },
@@ -107,7 +107,7 @@ function Portfolio() {
     {
       title: "DavCalen",
       description: "Aplicación de escritorio multifuncional desarrollada con Flutter para Windows",
-      image: "/cal.webp",
+      image: "/images/cal.webp",
       technologies: [
         { name: "Flutter", icon: <SiFlutter className="text-[#02569B]" /> },
         { name: "Windows", icon: <SiWindows className="text-[#0078D6]" /> },

@@ -211,7 +211,7 @@ function Hero() {
 
             {/* Imagen principal */}
             <motion.img
-              src="/W.jpg"
+              src="/images/W.jpg"
               alt="Developer Profile"
               className="w-96 h-96 object-cover rounded-full border-4 border-white/10 shadow-lg relative z-10"
               whileHover={{ scale: 1.02 }}

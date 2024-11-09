@@ -29,7 +29,7 @@ function Certificates() {
             duration: "40h",
             icon: <SiHtml5 className="text-[#E34F26]" />,
             credential: "ID: SCbadAuZsu2HqpfY5zv81oET",
-            image: "/g.png",
+            image: "/images/g.png",
             color: "from-orange-500/20 via-red-500/20 to-pink-500/20"
         },
         {
@@ -39,7 +39,7 @@ function Certificates() {
             duration: "40h",
             icon: <SiCss3 className="text-[#2965F1]" />,
             credential: "ID: 85yp5HZikgvqJG3HqX1rDKC4",
-            image: "/g2.png",
+            image: "/images/g2.png",
             color: "from-blue-500/20 via-indigo-500/20 to-purple-500/20"
         },
         {
@@ -49,7 +49,7 @@ function Certificates() {
             duration: "8h",
             icon: <FaCode className="text-[#FF0000]" />,
             credential: "Número de serie: OA-2024-1027000629285",
-            image: "/py.png",
+            image: "/images/py.png",
             color: "from-red-500/20 via-orange-500/20 to-yellow-500/20"
         },
         {
@@ -59,7 +59,7 @@ function Certificates() {
             duration: "7h",
             icon: <FaAward className="text-[#4F46E5]" />,
             credential: "Certificado de Taller",
-            image: "/Taller.png",
+            image: "/images/Taller.png",
             color: "from-purple-500/20 via-pink-500/20 to-red-500/20"
         }
     ];
