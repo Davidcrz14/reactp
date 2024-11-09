@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from "@vercel/analytics/react";
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -20,6 +21,7 @@ function App() {
         <Certificates />
       </main>
       <Footer />
+      <Analytics />
     </div>
   );
 }
