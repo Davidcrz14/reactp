@@ -161,33 +161,49 @@ function Portfolio() {
           <svg className="w-full h-full">
             <motion.path
               d="M0,50 Q400,300 800,50"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="1"
+              stroke="url(#gradient-red)"
+              strokeWidth="2"
               fill="none"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 2 }}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear" }}
             />
             <motion.path
               d="M0,150 Q400,0 800,150"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="1"
+              stroke="url(#gradient-blue)"
+              strokeWidth="2"
               fill="none"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 2, delay: 0.5 }}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 2, delay: 1, repeat: Infinity, repeatType: "loop", ease: "linear" }}
             />
+            <defs>
+              <linearGradient id="gradient-red" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(239, 68, 68, 0)" />
+                <stop offset="50%" stopColor="rgba(239, 68, 68, 1)" />
+                <stop offset="100%" stopColor="rgba(239, 68, 68, 0)" />
+                <animate attributeName="x1" from="-100%" to="100%" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="x2" from="0%" to="200%" dur="2s" repeatCount="indefinite" />
+              </linearGradient>
+              <linearGradient id="gradient-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(59, 130, 246, 0)" />
+                <stop offset="50%" stopColor="rgba(59, 130, 246, 1)" />
+                <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+                <animate attributeName="x1" from="-100%" to="100%" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="x2" from="0%" to="200%" dur="2s" repeatCount="indefinite" />
+              </linearGradient>
+            </defs>
           </svg>
         </div>
       </div>
 
-      <div className="container mx-auto px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         {/* Encabezado alineado como Skills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center gap-4 mb-24"
+          className="flex flex-col md:flex-row items-center gap-4 mb-24"
         >
           <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
             <span className="text-3xl">💼</span>
@@ -195,7 +211,7 @@ function Portfolio() {
             <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full animate-pulse"></div>
             <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse delay-150"></div>
           </div>
-          <h2 className="text-5xl font-bold tracking-tight text-white">PROJECTS</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white">PROJECTS</h2>
           <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
         </motion.div>
 
@@ -214,7 +230,7 @@ function Portfolio() {
         </div>
 
         {/* Grid de proyectos mejorado */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
