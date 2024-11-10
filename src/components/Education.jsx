@@ -103,7 +103,7 @@ export default function Component() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <div className="container mx-auto px-8 relative z-20">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -120,7 +120,7 @@ export default function Component() {
                             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                         />
                     </div>
-                    <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white">EDUCATION</h2>
+                    <h2 className="text-5xl font-bold tracking-tight text-white">EDUCATION</h2>
                     <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
                 </motion.div>
 
@@ -141,14 +141,14 @@ export default function Component() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2 }}
-                                className={`relative ${index % 2 === 0 ? 'sm:text-right' : 'sm:text-left'}`}
+                                className={`relative ${index % 2 === 0 ? 'text-right' : 'text-left'}`}
                             >
-                                <div className={`flex flex-col sm:flex-row items-center gap-8 ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''}`}>
+                                <div className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
                                     <motion.div
                                         whileHover={{ scale: 1.02 }}
-                                        className="w-full sm:w-1/2"
+                                        className="w-1/2"
                                     >
-                                        <div className="bg-[#1a1a1a] rounded-2xl p-6 sm:p-8 border border-gray-800 relative group">
+                                        <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-gray-800 relative group">
                                             <div className={`absolute inset-0 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-300`}></div>
 
                                             <div className="flex items-center gap-4 mb-4">
@@ -205,7 +205,7 @@ export default function Component() {
                                                 repeat: Infinity
                                             }}
                                         />
-                                        <div className={`absolute top-1/2 hidden sm:block ${index % 2 === 0 ? '-right-8' : '-left-8'} w-8 h-px bg-gray-700`}></div>
+                                        <div className={`absolute top-1/2 block ${index % 2 === 0 ? '-right-8' : '-left-8'} w-8 h-px bg-gray-700`}></div>
                                     </div>
                                 </div>
                             </motion.div>
