@@ -122,14 +122,11 @@ function Portfolio() {
     }
   ];
 
-  // Agregar categorías únicas
   const categories = [...new Set(projects.map(p => p.category))];
 
   return (
     <section ref={containerRef} id="projects" className="py-32 relative overflow-hidden">
-      {/* Elementos decorativos de fondo mejorados */}
       <div className="absolute inset-0">
-        {/* Patrón de puntos hexagonal */}
         <div className="absolute inset-0">
           {Array.from({ length: 50 }).map((_, i) => (
             <motion.div
@@ -156,7 +153,6 @@ function Portfolio() {
           ))}
         </div>
 
-        {/* Líneas de conexión animadas */}
         <div className="absolute inset-0">
           <svg className="w-full h-full">
             <motion.path
@@ -197,26 +193,23 @@ function Portfolio() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        {/* Encabezado alineado como Skills */}
+      <div className="container mx-auto px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center gap-4 mb-24"
+          className="flex items-center gap-4 mb-24"
         >
           <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
             <span className="text-3xl">💼</span>
-            {/* Elementos decorativos alrededor del ícono */}
             <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full animate-pulse"></div>
             <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse delay-150"></div>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white">PROJECTS</h2>
+          <h2 className="text-5xl font-bold tracking-tight text-white">PROJECTS</h2>
           <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
         </motion.div>
 
-        {/* Filtro por categorías */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex justify-center gap-4 mb-12">
           {categories.map((category) => (
             <motion.button
               key={category}
@@ -229,8 +222,7 @@ function Portfolio() {
           ))}
         </div>
 
-        {/* Grid de proyectos mejorado */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -240,12 +232,10 @@ function Portfolio() {
               transition={{ delay: index * 0.1 }}
               className="group relative h-full"
             >
-              {/* Carta del proyecto mejorada */}
               <motion.div
                 whileHover={{ y: -5 }}
                 className="relative bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 h-full flex flex-col"
               >
-                {/* Imagen con efectos - altura fija */}
                 <div className="relative h-[200px] overflow-hidden">
                   <motion.div
                     className="absolute inset-0"
@@ -260,18 +250,15 @@ function Portfolio() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
                   </motion.div>
 
-                  {/* Categoría */}
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-gray-800/80 backdrop-blur-sm text-xs text-gray-300">
                     {project.category}
                   </div>
                 </div>
 
-                {/* Contenido - flex-grow para ocupar espacio restante */}
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                   <p className="text-gray-400 text-sm mb-4 flex-grow">{project.description}</p>
 
-                  {/* Tecnologías */}
                   <div className="flex flex-wrap gap-3 mb-4">
                     {project.technologies.map((tech) => (
                       <motion.div
@@ -285,7 +272,6 @@ function Portfolio() {
                     ))}
                   </div>
 
-                  {/* Enlaces siempre al fondo */}
                   <div className="flex items-center gap-4 mt-auto pt-4">
                     <motion.a
                       href={project.links.github}
@@ -312,7 +298,6 @@ function Portfolio() {
                   </div>
                 </div>
 
-                {/* Efectos decorativos */}
                 <motion.div
                   className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r"
                   style={{
