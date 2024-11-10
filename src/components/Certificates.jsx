@@ -1,5 +1,7 @@
+'use client'
+
 import { motion, useScroll } from 'framer-motion';
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaAward, FaCertificate, FaCode } from 'react-icons/fa';
 import { SiCss3, SiHtml5 } from 'react-icons/si';
 
@@ -10,10 +12,8 @@ function Certificates() {
         offset: ["start end", "end start"]
     });
 
-    // Limpieza de efectos
     useEffect(() => {
         return () => {
-            // Limpieza de animaciones al desmontar
             const elements = document.querySelectorAll('.animate-cleanup');
             elements.forEach(element => {
                 element.getAnimations().forEach(animation => animation.cancel());
@@ -64,7 +64,6 @@ function Certificates() {
         }
     ];
 
-    // Variantes de animación optimizadas
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -91,9 +90,7 @@ function Certificates() {
 
     return (
         <section ref={containerRef} id="certificates" className="py-32 relative overflow-hidden">
-            {/* Elementos decorativos de fondo mejorados */}
             <div className="absolute inset-0 pointer-events-none">
-                {/* Grid de puntos similar a Hero.jsx */}
                 <div className="absolute inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] gap-4 opacity-10">
                     {Array.from({ length: 100 }).map((_, i) => (
                         <motion.div
@@ -112,11 +109,10 @@ function Certificates() {
                     ))}
                 </div>
 
-                {/* Líneas curvas decorativas */}
                 <svg className="absolute inset-0 w-full h-full">
                     <motion.path
                         d="M0,200 C150,150 300,250 450,200 S600,150 800,200"
-                        stroke="rgba(255,255,255,0.05)"
+                        stroke="url(#gradient-purple)"
                         strokeWidth="1"
                         fill="none"
                         initial={{ pathLength: 0 }}
@@ -125,18 +121,33 @@ function Certificates() {
                     />
                     <motion.path
                         d="M0,300 C200,250 400,350 600,300 S800,250 1000,300"
-                        stroke="rgba(128,90,213,0.05)"
+                        stroke="url(#gradient-teal)"
                         strokeWidth="1"
                         fill="none"
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: 1 }}
                         transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
                     />
+                    <defs>
+                        <linearGradient id="gradient-purple" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="rgba(168, 85, 247, 0)" />
+                            <stop offset="50%" stopColor="rgba(168, 85, 247, 0.5)" />
+                            <stop offset="100%" stopColor="rgba(168, 85, 247, 0)" />
+                            <animate attributeName="x1" from="-100%" to="100%" dur="4s" repeatCount="indefinite" />
+                            <animate attributeName="x2" from="0%" to="200%" dur="4s" repeatCount="indefinite" />
+                        </linearGradient>
+                        <linearGradient id="gradient-teal" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="rgba(45, 212, 191, 0)" />
+                            <stop offset="50%" stopColor="rgba(45, 212, 191, 0.5)" />
+                            <stop offset="100%" stopColor="rgba(45, 212, 191, 0)" />
+                            <animate attributeName="x1" from="-100%" to="100%" dur="4s" repeatCount="indefinite" />
+                            <animate attributeName="x2" from="0%" to="200%" dur="4s" repeatCount="indefinite" />
+                        </linearGradient>
+                    </defs>
                 </svg>
 
-                {/* Formas geométricas flotantes */}
                 <motion.div
-                    className="absolute top-20 right-20"
+                    className="absolute top-20 right-20 block"
                     animate={{
                         rotate: 360,
                         scale: [1, 1.2, 1],
@@ -147,12 +158,11 @@ function Certificates() {
                         ease: "linear",
                     }}
                 >
-                    <div className="w-32 h-32 border-2 border-gray-700/20 rounded-full" />
+                    <div className="w-32 h-32 border-2 border-purple-500/20 rounded-full" />
                 </motion.div>
 
-                {/* Hexágono rotativo */}
                 <motion.div
-                    className="absolute bottom-20 left-20"
+                    className="absolute bottom-20 left-20 block"
                     animate={{
                         rotate: -360,
                     }}
@@ -179,11 +189,10 @@ function Certificates() {
                     </div>
                 </motion.div>
 
-                {/* Partículas flotantes */}
                 {Array.from({ length: 5 }).map((_, i) => (
                     <motion.div
                         key={i}
-                        className="absolute w-2 h-2 bg-gray-500/20 rounded-full"
+                        className="absolute w-2 h-2 bg-gray-500/20 rounded-full block"
                         style={{
                             top: `${Math.random() * 100}%`,
                             left: `${Math.random() * 100}%`,
@@ -200,7 +209,6 @@ function Certificates() {
                     />
                 ))}
 
-                {/* Línea ondulada */}
                 <motion.div
                     className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-700/20 to-transparent"
                     animate={{
@@ -216,13 +224,12 @@ function Certificates() {
             </div>
 
             <motion.div
-                className="container mx-auto px-12 relative z-10"
+                className="container mx-auto px-8 relative z-10"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
             >
-                {/* Encabezado */}
                 <motion.div
                     variants={itemVariants}
                     className="flex items-center gap-4 mb-24"
@@ -230,7 +237,6 @@ function Certificates() {
                     <div className="relative">
                         <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
                             <span className="text-3xl">🎓</span>
-                            {/* Elementos decorativos del ícono */}
                             <motion.div
                                 className="absolute -top-2 -right-2 w-4 h-4"
                                 animate={{
@@ -252,7 +258,6 @@ function Certificates() {
                                 <div className="w-full h-full bg-purple-500/20 rounded-full blur-sm" />
                             </motion.div>
                         </div>
-                        {/* Líneas decorativas alrededor del ícono */}
                         <motion.div
                             className="absolute inset-0"
                             animate={{ rotate: [0, 360] }}
@@ -266,8 +271,7 @@ function Certificates() {
                     <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent" />
                 </motion.div>
 
-                {/* Grid de certificados */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-8">
                     {certificates.map((cert, index) => (
                         <motion.div
                             key={cert.title}
@@ -279,7 +283,6 @@ function Certificates() {
                                 transition={{ type: "spring", stiffness: 300 }}
                                 className="relative bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 h-full flex flex-col"
                             >
-                                {/* Imagen con efectos mejorados */}
                                 <div className="relative h-[200px] overflow-hidden">
                                     <motion.div
                                         className="absolute inset-0"
@@ -291,7 +294,6 @@ function Certificates() {
                                             alt={cert.title}
                                             className="w-full h-full object-cover"
                                         />
-                                        {/* Overlay gradiente animado */}
                                         <motion.div
                                             className="absolute inset-0"
                                             initial={{ opacity: 0 }}
@@ -303,7 +305,6 @@ function Certificates() {
                                         />
                                     </motion.div>
 
-                                    {/* Esquinas decorativas animadas */}
                                     <motion.div
                                         className="absolute top-4 left-4 w-8 h-8"
                                         animate={{
@@ -326,7 +327,6 @@ function Certificates() {
                                     </motion.div>
                                 </div>
 
-                                {/* Contenido con animaciones mejoradas */}
                                 <div className="p-6 flex flex-col flex-grow">
                                     <div className="flex items-center gap-4 mb-4">
                                         <motion.div
@@ -350,7 +350,6 @@ function Certificates() {
                                         </motion.div>
                                     </div>
 
-                                    {/* Credencial con efectos mejorados */}
                                     <div className="relative overflow-hidden mt-auto">
                                         <motion.div
                                             className="p-4 bg-gray-800/30 rounded-lg border border-gray-700/50"
@@ -361,11 +360,10 @@ function Certificates() {
                                                     animate={{ rotate: [0, 360] }}
                                                     transition={{ duration: 4, repeat: Infinity }}
                                                 >
-                                                    <FaCertificate className="text-gray-400" />
+                                                    <FaCertificate className="text-gray-400 text-base" />
                                                 </motion.div>
                                                 <span className="text-sm text-gray-400">{cert.credential}</span>
                                             </div>
-                                            {/* Efecto de brillo mejorado */}
                                             <motion.div
                                                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-45"
                                                 animate={{
@@ -381,7 +379,6 @@ function Certificates() {
                                     </div>
                                 </div>
 
-                                {/* Efecto de brillo en hover */}
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 blur-xl"
                                     transition={{ duration: 0.5 }}
