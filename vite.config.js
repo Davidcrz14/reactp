@@ -1,4 +1,6 @@
 import react from '@vitejs/plugin-react';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -7,7 +9,6 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'Portfolio DavC',
         short_name: 'DavC',
@@ -16,20 +17,9 @@ export default defineConfig({
         display: 'standalone',
         scope: '/',
         start_url: '/',
-        icons: [
-          {
-            src: '/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: '/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
       },
       workbox: {
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -38,10 +28,7 @@ export default defineConfig({
               cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
-              },
-              cacheableResponse: {
-                statuses: [0, 200]
+                maxAgeSeconds: 60 * 60 * 24 * 365
               }
             }
           },
@@ -52,7 +39,7 @@ export default defineConfig({
               cacheName: 'images-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 días
+                maxAgeSeconds: 60 * 60 * 24 * 30
               }
             }
           }
@@ -61,39 +48,28 @@ export default defineConfig({
     })
   ],
   build: {
-    outDir: 'dist',
-    sourcemap: true,
-    assetsDir: 'assets',
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'animation-vendor': ['framer-motion'],
           'icons-vendor': ['react-icons']
-        },
-        assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split('.').at(1);
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = 'img';
-          }
-          return `assets/${extType}/[name]-[hash][extname]`;
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
+        }
       }
     },
-    cssCodeSplit: true,
-    minify: 'esbuild',
-    target: 'esnext',
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 4000,
   },
-  publicDir: 'public',
   css: {
-    modules: {
-      localsConvention: 'camelCase'
+    postcss: {
+      plugins: [
+        autoprefixer(),
+        cssnano({
+          preset: ['default', {
+            discardComments: { removeAll: true }
+          }]
+        })
+      ]
     }
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'react-icons']
   }
-})
+});
