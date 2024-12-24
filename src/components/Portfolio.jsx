@@ -193,27 +193,29 @@ function Portfolio() {
         </div>
       </div>
 
-      <div className="container mx-auto px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center gap-4 mb-24"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-12 sm:mb-24"
         >
-          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
-            <span className="text-3xl">💼</span>
-            <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full animate-pulse"></div>
-            <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse delay-150"></div>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
+              <span className="text-3xl">💼</span>
+              <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full animate-pulse"></div>
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse delay-150"></div>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">PROJECTS</h2>
           </div>
-          <h2 className="text-5xl font-bold tracking-tight text-white">PROJECTS</h2>
-          <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
+          <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
         </motion.div>
 
-        <div className="flex justify-center gap-4 mb-12 flex-wrap">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
           {categories.map((category) => (
             <motion.button
               key={category}
-              className="px-4 py-2 rounded-full bg-gray-800/50 text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gray-800/50 text-xs sm:text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -222,7 +224,7 @@ function Portfolio() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -255,16 +257,16 @@ function Portfolio() {
                   </div>
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4 flex-grow">{project.description}</p>
+                <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm mb-4 flex-grow">{project.description}</p>
 
-                  <div className="flex flex-wrap gap-3 mb-4">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
                     {project.technologies.map((tech) => (
                       <motion.div
                         key={tech.name}
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/50 text-sm"
+                        className="flex items-center gap-2 px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 text-xs sm:text-sm"
                       >
                         {tech.icon}
                         <span className="text-gray-300">{tech.name}</span>
@@ -272,12 +274,12 @@ function Portfolio() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-4 mt-auto pt-4">
+                  <div className="flex items-center gap-3 sm:gap-4 mt-auto">
                     <motion.a
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
+                      className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors text-xs sm:text-sm"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -288,7 +290,7 @@ function Portfolio() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
+                      className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors text-xs sm:text-sm"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >

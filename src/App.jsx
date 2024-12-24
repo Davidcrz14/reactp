@@ -11,9 +11,9 @@ import Skills from './components/Skills';
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#212121] overflow-hidden">
+    <div className="min-h-screen bg-[#212121] w-full overflow-x-hidden">
       <Header />
-      <main className="w-full max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <Hero />
         <Skills />
         <Education />
