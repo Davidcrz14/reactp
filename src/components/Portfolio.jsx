@@ -209,7 +209,7 @@ function Portfolio() {
           <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
         </motion.div>
 
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex justify-center gap-4 mb-12 flex-wrap">
           {categories.map((category) => (
             <motion.button
               key={category}
@@ -222,7 +222,7 @@ function Portfolio() {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}

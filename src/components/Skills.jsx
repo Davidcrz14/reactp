@@ -158,7 +158,7 @@ function Skills() {
                     <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {skills.map((skillGroup, index) => (
                         <motion.div
                             key={skillGroup.category}

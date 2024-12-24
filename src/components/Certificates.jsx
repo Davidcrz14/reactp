@@ -1,9 +1,7 @@
-
-
 import { motion, useScroll } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
-import { FaAward, FaCertificate, FaCode } from 'react-icons/fa';
-import { SiCss3, SiHtml5 } from 'react-icons/si';
+import { FaAward, FaCertificate, FaCode, FaNodeJs, FaReact } from 'react-icons/fa';
+import { SiCss3, SiHtml5, SiMysql } from 'react-icons/si';
 
 function Certificates() {
     const containerRef = useRef(null);
@@ -61,6 +59,44 @@ function Certificates() {
             credential: "Certificado de Taller",
             image: "/images/Taller.png",
             color: "from-purple-500/20 via-pink-500/20 to-red-500/20"
+        }
+    ];
+
+    const platziCourses = [
+        {
+            title: "Backend con Node.js: API REST con Express.js",
+            platform: "Platzi",
+            date: "2024",
+            icon: <FaNodeJs className="text-[#339933]" />,
+            color: "from-green-500/20 via-emerald-500/20 to-teal-500/20"
+        },
+        {
+            title: "Frontend Developer",
+            platform: "Platzi",
+            date: "2024",
+            icon: <SiHtml5 className="text-[#E34F26]" />,
+            color: "from-orange-500/20 via-red-500/20 to-pink-500/20"
+        },
+        {
+            title: "React.js con TypeScript",
+            platform: "Platzi",
+            date: "2024",
+            icon: <FaReact className="text-[#61DAFB]" />,
+            color: "from-blue-500/20 via-cyan-500/20 to-teal-500/20"
+        },
+        {
+            title: "React.js con Vite.js y TailwindCSS",
+            platform: "Platzi",
+            date: "2024",
+            icon: <FaReact className="text-[#61DAFB]" />,
+            color: "from-purple-500/20 via-blue-500/20 to-indigo-500/20"
+        },
+        {
+            title: "SQL y MySQL",
+            platform: "Platzi",
+            date: "2024",
+            icon: <SiMysql className="text-[#4479A1]" />,
+            color: "from-blue-500/20 via-indigo-500/20 to-purple-500/20"
         }
     ];
 
@@ -224,7 +260,7 @@ function Certificates() {
             </div>
 
             <motion.div
-                className="container mx-auto px-8 relative z-10"
+                className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -247,31 +283,13 @@ function Certificates() {
                             >
                                 <div className="w-full h-full bg-blue-500/20 rounded-full blur-sm" />
                             </motion.div>
-                            <motion.div
-                                className="absolute -bottom-2 -left-2 w-4 h-4"
-                                animate={{
-                                    scale: [1, 1.2, 1],
-                                    opacity: [0.5, 1, 0.5],
-                                }}
-                                transition={{ duration: 2, delay: 1, repeat: Infinity }}
-                            >
-                                <div className="w-full h-full bg-purple-500/20 rounded-full blur-sm" />
-                            </motion.div>
                         </div>
-                        <motion.div
-                            className="absolute inset-0"
-                            animate={{ rotate: [0, 360] }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        >
-                            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-gray-700/50" />
-                            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-gray-700/50" />
-                        </motion.div>
                     </div>
-                    <h2 className="text-5xl font-bold tracking-tight text-white">CERTIFICATES</h2>
-                    <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent" />
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">CERTIFICATES</h2>
+                    <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent" />
                 </motion.div>
 
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                     {certificates.map((cert, index) => (
                         <motion.div
                             key={cert.title}
@@ -386,6 +404,53 @@ function Certificates() {
                             </motion.div>
                         </motion.div>
                     ))}
+                </div>
+
+                <div className="mt-24">
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex items-center gap-4 mb-12"
+                    >
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                            <img src="https://static.platzi.com/media/platzi-isotipo@2x.png" alt="Platzi" className="w-8 h-8" />
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white">Platzi Courses</h3>
+                        <a
+                            href="https://platzi.com/p/davidprofesor14/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-auto px-4 py-2 rounded-lg bg-[#98CA3F] text-black font-medium hover:bg-[#7BA32F] transition-colors"
+                        >
+                            Ver perfil en Platzi
+                        </a>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {platziCourses.map((course, index) => (
+                            <motion.div
+                                key={course.title}
+                                variants={itemVariants}
+                                className="group relative"
+                            >
+                                <div className="relative bg-[#1a1a1a] rounded-xl p-6 border border-gray-800 hover:border-gray-700 transition-colors">
+                                    <div className="flex items-center gap-4 mb-3">
+                                        <div className="w-10 h-10 rounded-lg bg-gray-800/50 flex items-center justify-center">
+                                            {course.icon}
+                                        </div>
+                                        <div className="flex-grow">
+                                            <h4 className="text-white font-medium text-sm">{course.title}</h4>
+                                            <p className="text-gray-400 text-xs">{course.platform}</p>
+                                        </div>
+                                    </div>
+                                    <div className="absolute top-3 right-3">
+                                        <span className="px-2 py-1 rounded-full text-xs bg-[#98CA3F]/20 text-[#98CA3F]">
+                                            {course.date}
+                                        </span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </motion.div>
         </section>

@@ -31,29 +31,28 @@ function Hero() {
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-12 gap-8 mt-12 relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="col-span-6"
+          className="col-span-1 md:col-span-6 px-4 md:px-0"
         >
           {/* Círculo pequeño del perfil con animación */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5, type: "spring" }}
-            className="small-profile-circle"
+            className="small-profile-circle hidden md:block"
           >
             <div className="relative">
-
               <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl"></div>
             </div>
           </motion.div>
 
-          {/* Título principal modificado - quitando líneas moradas */}
+          {/* Título principal modificado */}
           <motion.h1
-            className="title text-white relative"
+            className="text-4xl md:text-6xl lg:text-7xl text-white relative mb-6 md:mb-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -107,12 +106,12 @@ function Hero() {
         </motion.div>
 
         <motion.div
-          className="col-span-6 profile-section"
+          className="col-span-1 md:col-span-6 profile-section flex justify-center items-center"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <div className="profile-container relative">
+          <div className="profile-container relative w-full max-w-md">
             {/* Círculos decorativos animados */}
             {[1, 2, 3].map((i) => (
               <motion.div
@@ -213,7 +212,7 @@ function Hero() {
             <motion.img
               src="/images/W.jpg"
               alt="Developer Profile"
-              className="w-96 h-96 object-cover rounded-full border-4 border-white/10 shadow-lg relative z-10"
+              className="w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-full border-4 border-white/10 shadow-lg relative z-10"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             />
