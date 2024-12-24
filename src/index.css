@@ -11,51 +11,8 @@
   color: #ffffff;
 }
 
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  overflow-x: hidden;
-  width: 100%;
   min-height: 100vh;
   background-color: #212121;
-  scroll-behavior: smooth;
-}
-
-body {
-  position: relative;
-}
-
-.circular-design {
-  position: absolute;
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.profile-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 100%;
-}
-
-@media (max-width: 768px) {
-  .circular-design {
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 640px) {
-  .circular-design {
-    max-width: 250px;
-  }
 }
