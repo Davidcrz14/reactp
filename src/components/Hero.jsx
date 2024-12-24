@@ -18,7 +18,7 @@ function Hero() {
           {/* Text Content */}
           <div className="flex flex-col justify-center text-center lg:text-left">
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6"
+              className="text-5xl lg:text-7xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -43,7 +43,7 @@ function Hero() {
             </motion.h1>
 
             <motion.p
-              className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"
+              className="text-gray-300 text-lg max-w-2xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -57,7 +57,7 @@ function Hero() {
 
           {/* Profile Image */}
           <div className="relative flex justify-center items-center">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-[300px] h-[300px] lg:w-[400px] lg:h-[400px]">
               {/* Orbit animations */}
               <motion.div
                 className="absolute inset-0"
