@@ -133,7 +133,7 @@ export default function Component() {
                         className="absolute left-1/2 top-0 w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent"
                     />
 
-                    <div className="space-y-24">
+                    <div className="space-y-24 md:space-y-32">
                         {education.map((edu, index) => (
                             <motion.div
                                 key={edu.title}
@@ -141,14 +141,14 @@ export default function Component() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2 }}
-                                className={`relative ${index % 2 === 0 ? 'text-right' : 'text-left'}`}
+                                className={`relative ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} text-left`}
                             >
-                                <div className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                                <div className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                                     <motion.div
                                         whileHover={{ scale: 1.02 }}
-                                        className="w-1/2"
+                                        className="w-full md:w-1/2"
                                     >
-                                        <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-gray-800 relative group">
+                                        <div className="bg-[#1a1a1a] rounded-2xl p-6 md:p-8 border border-gray-800 relative group">
                                             <div className={`absolute inset-0 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-300`}></div>
 
                                             <div className="flex items-center gap-4 mb-4">
@@ -193,7 +193,7 @@ export default function Component() {
                                         </div>
                                     </motion.div>
 
-                                    <div className="w-4 h-4 rounded-full bg-gray-800 relative z-10">
+                                    <div className="hidden md:block w-4 h-4 rounded-full bg-gray-800 relative z-10">
                                         <motion.div
                                             className="absolute inset-0 rounded-full bg-white"
                                             animate={{

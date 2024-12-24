@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import MenuOverlay from './MenuOverlay';
+import React, { lazy, memo, Suspense, useCallback, useEffect, useState } from 'react';
 
-function Header() {
+// Carga diferida del MenuOverlay
+const MenuOverlay = lazy(() => import('./MenuOverlay'));
+
+// Componente de carga para el menú
+const MenuLoader = () => null;
+
+const Header = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  // Función para manejar el scroll suave
-  const scrollToSection = (sectionId) => {
+  // Función optimizada para manejar el scroll suave
+  const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
@@ -14,64 +19,63 @@ function Header() {
         block: 'start',
       });
     }
-  };
+  }, []);
 
-  // Detectar la sección activa durante el scroll
+  // Detectar la sección activa durante el scroll con throttling
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['skills', 'education', 'projects'];
-      const scrollPosition = window.scrollY + 100; // Offset para mejor detección
+    let timeoutId = null;
+    const sections = ['skills', 'education', 'projects'];
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+    const handleScroll = () => {
+      if (timeoutId) return;
+
+      timeoutId = setTimeout(() => {
+        const scrollPosition = window.scrollY + 100;
+
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
-      }
+        timeoutId = null;
+      }, 100); // Throttle de 100ms
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
+
+  // Memoizar los botones de navegación
+  const NavButton = memo(({ section, label }) => (
+    <button
+      onClick={() => scrollToSection(section)}
+      className={`nav-link transition-all duration-300 ${activeSection === section ? 'text-white' : 'text-gray-400'
+        }`}
+    >
+      {label}
+    </button>
+  ));
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#212121]/80 backdrop-blur-sm">
       <nav className="container mx-auto px-12 py-8 border-b border-gray-700">
         <div className="flex justify-between items-center">
           <div className="text-xl font-medium tracking-wider text-white">DavC.</div>
+
           <ul className="flex space-x-12">
-            <li>
-              <button
-                onClick={() => scrollToSection('skills')}
-                className={`nav-link transition-all duration-300 ${activeSection === 'skills' ? 'text-white' : 'text-gray-400'
-                  }`}
-              >
-                SKILLS
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection('education')}
-                className={`nav-link transition-all duration-300 ${activeSection === 'education' ? 'text-white' : 'text-gray-400'
-                  }`}
-              >
-                EDUCATION
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection('projects')}
-                className={`nav-link transition-all duration-300 ${activeSection === 'projects' ? 'text-white' : 'text-gray-400'
-                  }`}
-              >
-                PROJECTS
-              </button>
-            </li>
+            <li><NavButton section="skills" label="SKILLS" /></li>
+            <li><NavButton section="education" label="EDUCATION" /></li>
+            <li><NavButton section="projects" label="PROJECTS" /></li>
           </ul>
+
           <button
             className={`menu-button transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
               }`}
@@ -87,9 +91,11 @@ function Header() {
         </div>
       </nav>
 
-      <MenuOverlay isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Suspense fallback={<MenuLoader />}>
+        {isMenuOpen && <MenuOverlay isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />}
+      </Suspense>
     </header>
   );
-}
+});
 
 export default Header;

@@ -318,6 +318,15 @@ function Certificates() {
                                 whileHover={{ y: -5 }}
                                 className="bg-[#1a1a1a] rounded-2xl p-6 border border-gray-800 h-full"
                             >
+                                <div className="relative h-[200px] mb-6 overflow-hidden rounded-xl">
+                                    <img
+                                        src={certificate.image}
+                                        alt={certificate.title}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
+                                </div>
+
                                 <div className="flex items-center gap-4 mb-6">
                                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
                                         {certificate.icon}
