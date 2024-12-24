@@ -1,75 +1,37 @@
 import react from '@vitejs/plugin-react';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    VitePWA({
-      registerType: 'autoUpdate',
-      manifest: {
-        name: 'Portfolio DavC',
-        short_name: 'DavC',
-        theme_color: '#121212',
-        background_color: '#121212',
-        display: 'standalone',
-        scope: '/',
-        start_url: '/',
-      },
-      workbox: {
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-cache',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365
-              }
-            }
-          },
-          {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'images-cache',
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30
-              }
-            }
-          }
-        ]
-      }
-    })
-  ],
+  plugins: [react()],
   build: {
-    sourcemap: false,
+    outDir: 'dist',
+    sourcemap: true,
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'animation-vendor': ['framer-motion'],
-          'icons-vendor': ['react-icons']
-        }
+          'vendor': ['react', 'react-dom', 'framer-motion'],
+          'icons': ['react-icons']
+        },
+        assetFileNames: (assetInfo) => {
+          let extType = assetInfo.name.split('.').at(1);
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img';
+          }
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       }
     },
-    chunkSizeWarningLimit: 4000,
+    cssCodeSplit: true,
+    minify: 'esbuild',
+    target: 'esnext'
   },
+  publicDir: 'public',
   css: {
-    postcss: {
-      plugins: [
-        autoprefixer(),
-        cssnano({
-          preset: ['default', {
-            discardComments: { removeAll: true }
-          }]
-        })
-      ]
+    modules: {
+      localsConvention: 'camelCase'
     }
   }
-});
+})

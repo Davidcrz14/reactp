@@ -1,50 +1,74 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 
-function MenuOverlay({ isOpen, onClose }) {
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (isOpen && e.target.classList.contains('overlay-background')) {
-                onClose();
-            }
-        };
+const socialLinks = [
+    {
+        name: 'GitHub',
+        icon: <FaGithub className="text-[#333] text-2xl" />,
+        url: 'https://github.com/Davidcrz14/',
+        description: 'Revisa mis proyectos',
+        color: 'from-gray-500/20 to-black/20'
+    },
+    {
+        name: 'LinkedIn',
+        icon: <FaLinkedin className="text-[#0077B5] text-2xl" />,
+        url: 'https://www.linkedin.com/in/david-cruz-cruz-406179324/',
+        description: 'Conectemos profesionalmente',
+        color: 'from-blue-500/20 to-cyan-500/20'
+    },
+    {
+        name: 'Email',
+        icon: <HiMail className="text-[#EA4335] text-2xl" />,
+        url: 'mailto:davccorp@gmail.com',
+        description: 'Contáctame por correo',
+        color: 'from-red-500/20 to-orange-500/20'
+    }
+];
 
+const SocialLink = memo(({ link, index }) => (
+    <motion.a
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.1 }}
+        className="block"
+    >
+        <div className="relative bg-gray-800/50 rounded-xl p-4 hover:bg-gray-800/80 transition-all duration-300">
+            <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gray-900/50 flex items-center justify-center">
+                    {link.icon}
+                </div>
+                <div>
+                    <span className="text-lg font-medium text-white block">{link.name}</span>
+                    <span className="text-sm text-gray-400">{link.description}</span>
+                </div>
+                <svg className="w-5 h-5 text-gray-400 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </div>
+        </div>
+    </motion.a>
+));
+
+const MenuOverlay = ({ isOpen, onClose }) => {
+    useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
-            document.addEventListener('mousedown', handleClickOutside);
         }
-
         return () => {
             document.body.style.overflow = 'unset';
-            document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [isOpen, onClose]);
+    }, [isOpen]);
 
-    const socialLinks = [
-        {
-            name: 'GitHub',
-            icon: <FaGithub className="text-[#333] text-2xl" />,
-            url: 'https://github.com/Davidcrz14/',
-            description: 'Revisa mis proyectos',
-            color: 'from-gray-500/20 to-black/20'
-        },
-        {
-            name: 'LinkedIn',
-            icon: <FaLinkedin className="text-[#0077B5] text-2xl" />,
-            url: 'https://www.linkedin.com/in/david-cruz-cruz-406179324/',
-            description: 'Conectemos profesionalmente',
-            color: 'from-blue-500/20 to-cyan-500/20'
-        },
-        {
-            name: 'Email',
-            icon: <HiMail className="text-[#EA4335] text-2xl" />,
-            url: 'mailto:davccorp@gmail.com',
-            description: 'Contáctame por correo',
-            color: 'from-red-500/20 to-orange-500/20'
+    const handleClickOutside = useCallback((e) => {
+        if (e.target.classList.contains('overlay-background')) {
+            onClose();
         }
-    ];
+    }, [onClose]);
 
     return (
         <AnimatePresence>
@@ -56,6 +80,7 @@ function MenuOverlay({ isOpen, onClose }) {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
                         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 overlay-background"
+                        onClick={handleClickOutside}
                     />
 
                     <motion.div
@@ -86,31 +111,7 @@ function MenuOverlay({ isOpen, onClose }) {
 
                                 <div className="space-y-4">
                                     {socialLinks.map((link, index) => (
-                                        <motion.a
-                                            key={link.name}
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.1 }}
-                                            className="block"
-                                        >
-                                            <div className="relative bg-gray-800/50 rounded-xl p-4 hover:bg-gray-800/80 transition-all duration-300">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 rounded-xl bg-gray-900/50 flex items-center justify-center">
-                                                        {link.icon}
-                                                    </div>
-                                                    <div>
-                                                        <span className="text-lg font-medium text-white block">{link.name}</span>
-                                                        <span className="text-sm text-gray-400">{link.description}</span>
-                                                    </div>
-                                                    <svg className="w-5 h-5 text-gray-400 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </motion.a>
+                                        <SocialLink key={link.name} link={link} index={index} />
                                     ))}
                                 </div>
                             </div>
@@ -120,6 +121,6 @@ function MenuOverlay({ isOpen, onClose }) {
             )}
         </AnimatePresence>
     );
-}
+};
 
-export default MenuOverlay;
+export default memo(MenuOverlay);

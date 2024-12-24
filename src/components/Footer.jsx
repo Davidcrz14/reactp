@@ -144,7 +144,7 @@ function Footer() {
                         </div>
                     </motion.div>
 
-                    {/* Copyright */}
+
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
