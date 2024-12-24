@@ -143,87 +143,69 @@ function Skills() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={containerVariants}
-                className="container mx-auto px-12 relative z-10"
+                className="container mx-auto px-4 lg:px-8 relative z-10"
             >
-                <div className="flex items-center gap-4 mb-24">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="flex items-center gap-4 mb-12"
+                >
                     <div className="flex items-center gap-4">
                         <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
-                            <span className="text-3xl">⚡</span>
-                            {/* Elementos decorativos alrededor del ícono */}
+                            <span className="text-3xl">🛠️</span>
                             <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full animate-pulse"></div>
                             <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse delay-150"></div>
                         </div>
-                        <h2 className="text-5xl font-bold tracking-tight text-white">SKILLS</h2>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">SKILLS</h2>
                     </div>
-                    <div className="h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
-                </div>
+                    <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {skills.map((skillGroup, index) => (
                         <motion.div
                             key={skillGroup.category}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.2 }}
-                            className="relative group"
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="relative"
                         >
-                            {/* Carta principal */}
-                            <div className="relative z-10 bg-[#1a1a1a] rounded-2xl p-8 h-full border border-gray-800 backdrop-blur-xl transition-all duration-500 hover:transform hover:scale-[1.02] hover:border-gray-700">
-                                <div className="absolute inset-0 bg-gradient-to-br opacity-10 rounded-2xl transition-opacity duration-500 group-hover:opacity-20"
-                                    style={{
-                                        background: `radial-gradient(circle at 50% 50%, ${skillGroup.color.split(' ')[0].replace('from-', '')} 0%, transparent 70%)`
-                                    }}
-                                ></div>
-
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
-                                        <span className="text-2xl">{index + 1}</span>
-                                        {/* Líneas decorativas */}
-                                        <div className="absolute -top-2 -right-2 w-3 h-3 border-t-2 border-r-2 border-gray-700"></div>
-                                        <div className="absolute -bottom-2 -left-2 w-3 h-3 border-b-2 border-l-2 border-gray-700"></div>
+                            <motion.div
+                                whileHover={{ y: -5 }}
+                                className="bg-[#1a1a1a] rounded-2xl p-6 border border-gray-800"
+                            >
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                                        {skillGroup.items[0].icon}
                                     </div>
-                                    <h3 className="text-2xl font-bold text-white">{skillGroup.category}</h3>
+                                    <h3 className="text-xl font-bold text-white">{skillGroup.category}</h3>
                                 </div>
 
-                                <div className="space-y-6">
+                                <div className="space-y-4">
                                     {skillGroup.items.map((skill, skillIndex) => (
-                                        <motion.div
-                                            key={skill.name}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: skillIndex * 0.1 }}
-                                            className="group/skill relative bg-gray-800/50 rounded-xl p-4 hover:bg-gray-800/80 transition-all duration-300"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <div className="text-2xl transition-all duration-300 group-hover/skill:scale-110 group-hover/skill:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]">
-                                                    {skill.icon}
-                                                </div>
-                                                <div className="flex-grow">
-                                                    <span className="text-gray-300 font-medium block">{skill.name}</span>
-                                                    <span className="text-sm text-gray-500">{skill.description}</span>
-                                                </div>
-                                                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                                                    <span className="opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300">
-                                                        {skill.projects} projects
-                                                    </span>
-                                                    <motion.div
-                                                        whileHover={{ scale: 1.2 }}
-                                                        className="w-2 h-2 rounded-full bg-gray-600"
-                                                    ></motion.div>
-                                                </div>
+                                        <div key={skill.name}>
+                                            <div className="flex items-center justify-between mb-2">
+                                                <span className="text-gray-300">{skill.name}</span>
+                                                <span className="text-gray-400">{skill.projects} projects</span>
                                             </div>
-                                        </motion.div>
+                                            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                                <motion.div
+                                                    initial={{ width: 0 }}
+                                                    whileInView={{ width: `${skill.projects}%` }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 1, ease: "easeOut" }}
+                                                    className="h-full rounded-full"
+                                                    style={{
+                                                        background: `linear-gradient(to right, ${skillGroup.color.split(' ')[0].replace('from-', '')}, ${skillGroup.color.split(' ')[1].replace('to-', '')})`
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
                                     ))}
                                 </div>
-
-                                {/* Elementos decorativos flotantes */}
-                                <div className="absolute top-0 right-0 -mr-2 -mt-2 w-20 h-20">
-                                    <div className="absolute inset-0 rotate-45 border-2 border-dashed border-gray-800 rounded-lg"></div>
-                                </div>
-                            </div>
-
-                            {/* Efecto de brillo en hover */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"></div>
+                            </motion.div>
                         </motion.div>
                     ))}
                 </div>

@@ -193,12 +193,12 @@ function Portfolio() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-12 sm:mb-24"
+          className="flex items-center gap-4 mb-12"
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
@@ -211,11 +211,11 @@ function Portfolio() {
           <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <motion.button
               key={category}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gray-800/50 text-xs sm:text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
+              className="px-4 py-2 rounded-full bg-gray-800/50 text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -224,7 +224,7 @@ function Portfolio() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -257,16 +257,16 @@ function Portfolio() {
                   </div>
                 </div>
 
-                <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm mb-4 flex-grow">{project.description}</p>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4 flex-grow">{project.description}</p>
 
-                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
+                  <div className="flex flex-wrap gap-3 mb-4">
                     {project.technologies.map((tech) => (
                       <motion.div
                         key={tech.name}
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="flex items-center gap-2 px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 text-xs sm:text-sm"
+                        className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/50 text-sm"
                       >
                         {tech.icon}
                         <span className="text-gray-300">{tech.name}</span>
@@ -274,12 +274,12 @@ function Portfolio() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-3 sm:gap-4 mt-auto">
+                  <div className="flex items-center gap-4">
                     <motion.a
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors text-xs sm:text-sm"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -290,7 +290,7 @@ function Portfolio() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors text-xs sm:text-sm"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -299,13 +299,6 @@ function Portfolio() {
                     </motion.a>
                   </div>
                 </div>
-
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r"
-                  style={{
-                    background: `linear-gradient(to right, ${project.color.split(' ')[0].replace('from-', '')}, ${project.color.split(' ')[1].replace('to-', '')})`
-                  }}
-                />
               </motion.div>
             </motion.div>
           ))}

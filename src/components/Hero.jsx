@@ -3,7 +3,7 @@ import React from 'react';
 
 function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center py-20">
+    <section className="relative min-h-screen flex items-center justify-center">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] gap-4 opacity-20">
@@ -11,40 +11,39 @@ function Hero() {
             <div key={i} className="w-1 h-1 bg-gray-500 rounded-full"></div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.1 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-full h-full"
-        >
-          <svg className="w-full h-full">
-            <path
-              d="M0,200 Q400,50 800,300"
-              stroke="white"
-              strokeWidth="1"
-              fill="none"
-            />
-          </svg>
-        </motion.div>
       </div>
 
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-12 gap-8">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <div className="col-span-6 flex flex-col justify-center">
+          <div className="flex flex-col justify-center text-center lg:text-left">
             <motion.h1
-              className="text-7xl font-bold mb-6"
+              className="text-5xl lg:text-7xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <span className="block">FRONTEND</span>
+              <span className="relative inline-block">
+                FRONTEND
+                <motion.div
+                  className="absolute -right-4 -top-4 w-8 h-8 border-2 border-gray-700 rounded-full"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 90, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                />
+              </span>
+              <br />
               <span className="font-serif italic">DEVELOPER</span>
             </motion.h1>
 
             <motion.p
-              className="text-gray-300 text-lg max-w-lg"
+              className="text-gray-300 text-lg max-w-2xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -57,8 +56,25 @@ function Hero() {
           </div>
 
           {/* Profile Image */}
-          <div className="col-span-6 flex items-center justify-center relative">
-            <div className="relative w-[500px] h-[500px]">
+          <div className="relative flex justify-center items-center">
+            <div className="relative w-[300px] h-[300px] lg:w-[400px] lg:h-[400px]">
+              {/* Orbit animations */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full" />
+              </motion.div>
+
+              <motion.div
+                className="absolute inset-0"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              >
+                <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full" />
+              </motion.div>
+
               {/* Decorative circles */}
               {[1, 2, 3].map((i) => (
                 <motion.div
@@ -74,8 +90,10 @@ function Hero() {
                     ease: "linear"
                   }}
                 >
-                  <div className={`absolute inset-0 border border-white/10 rounded-full`}
-                    style={{ transform: `scale(${1 - i * 0.15})` }} />
+                  <div
+                    className="absolute inset-0 border border-white/10 rounded-full"
+                    style={{ transform: `scale(${1 - i * 0.15})` }}
+                  />
                 </motion.div>
               ))}
 
@@ -89,12 +107,11 @@ function Hero() {
                 <img
                   src="/images/W.jpg"
                   alt="Developer Profile"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-full"
                 />
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-purple-500/5 rounded-full blur-3xl" />
               </motion.div>
-
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-purple-500/5 rounded-full blur-3xl" />
             </div>
           </div>
         </div>
