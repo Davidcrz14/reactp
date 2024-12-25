@@ -2,7 +2,6 @@
 
 Un portafolio web moderno y responsivo desarrollado con React y Vite, que muestra mis habilidades, proyectos y experiencia como desarrollador Frontend.
 
-![Portfolio Preview](main/public/images/W.jpg)
 
 ## 🚀 Características
 
