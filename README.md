@@ -31,7 +31,7 @@ git clone https://github.com/Davidcrz14/reactp
 
 2. Instala las dependencias:
 ```bash
-cd portafolio
+cd reactp
 npm install
 ```
 
