@@ -378,3 +378,270 @@ body.menu-open main {
     margin-left: 0.5rem;
 }
 
+/* Estilos navideños mejorados */
+.christmas-theme {
+  position: relative;
+}
+
+.christmas-theme::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at top left, transparent 0%, rgba(139, 0, 0, 0.03) 100%),
+    radial-gradient(circle at top right, transparent 0%, rgba(0, 139, 0, 0.03) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.christmas-theme section {
+  position: relative;
+}
+
+.christmas-theme section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.01) 0%,
+    rgba(0, 255, 0, 0.01) 50%,
+    rgba(255, 215, 0, 0.01) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Efectos de brillo navideño */
+.christmas-theme .text-white {
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.2),
+               0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.christmas-theme button {
+  transition: all 0.3s ease;
+}
+
+.christmas-theme button:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2),
+              0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+/* Decoraciones navideñas para tarjetas */
+.christmas-theme .rounded-xl {
+  position: relative;
+  overflow: visible;
+}
+
+.christmas-theme .rounded-xl::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.05),
+    rgba(0, 255, 0, 0.05),
+    rgba(255, 215, 0, 0.05)
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.christmas-theme .rounded-xl:hover::before {
+  opacity: 1;
+}
+
+/* Efectos de nieve y luces */
+.christmas-theme .snow {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+/* Botón flotante de tema */
+.theme-toggle-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 50;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background: rgba(31, 41, 55, 0.8);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle-button:active {
+  transform: scale(0.9);
+}
+
+/* Animaciones mejoradas */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.christmas-theme .twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.christmas-theme .float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Efectos de resplandor para elementos destacados */
+.christmas-theme .glow {
+  position: relative;
+}
+
+.christmas-theme .glow::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 0, 0.2),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.christmas-theme .glow:hover::after {
+  opacity: 1;
+}
+
+/* Animación mejorada para los copos de nieve */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.snowflake {
+  position: fixed;
+  pointer-events: none;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.snowflake-1 { animation: snowfall 6s linear infinite; }
+.snowflake-2 { animation: snowfall 7s linear infinite; }
+.snowflake-3 { animation: snowfall 8s linear infinite; }
+.snowflake-4 { animation: snowfall 9s linear infinite; }
+.snowflake-5 { animation: snowfall 10s linear infinite; }
+
+/* Estilos del tema navideño */
+.christmas-theme {
+  position: relative;
+}
+
+.christmas-theme::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at top left, transparent 0%, rgba(139, 0, 0, 0.03) 100%),
+    radial-gradient(circle at top right, transparent 0%, rgba(0, 139, 0, 0.03) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.christmas-theme section {
+  position: relative;
+}
+
+.christmas-theme section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.01) 0%,
+    rgba(0, 255, 0, 0.01) 50%,
+    rgba(255, 215, 0, 0.01) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Efectos de brillo navideño */
+.christmas-theme .text-white {
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.2),
+               0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.christmas-theme button {
+  transition: all 0.3s ease;
+}
+
+.christmas-theme button:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2),
+              0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+/* Decoraciones navideñas para tarjetas */
+.christmas-theme .rounded-xl {
+  position: relative;
+  overflow: visible;
+}
+
+.christmas-theme .rounded-xl::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.05),
+    rgba(0, 255, 0, 0.05),
+    rgba(255, 215, 0, 0.05)
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.christmas-theme .rounded-xl:hover::before {
+  opacity: 1;
+}
+
