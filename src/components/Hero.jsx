@@ -3,7 +3,7 @@ import React from 'react';
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-24">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] gap-4 opacity-20">
@@ -14,11 +14,11 @@ function Hero() {
       </div>
 
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text Content */}
-          <div className="flex flex-col justify-center text-center lg:text-left">
+          <div className="flex flex-col justify-center text-center lg:text-left mt-8 sm:mt-0">
             <motion.h1
-              className="text-5xl lg:text-7xl font-bold mb-6"
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -26,7 +26,7 @@ function Hero() {
               <span className="relative inline-block">
                 FRONTEND
                 <motion.div
-                  className="absolute -right-4 -top-4 w-8 h-8 border-2 border-gray-700 rounded-full"
+                  className="absolute -right-4 -top-4 w-6 sm:w-8 h-6 sm:h-8 border-2 border-gray-700 rounded-full"
                   animate={{
                     scale: [1, 1.2, 1],
                     rotate: [0, 90, 0]
@@ -43,7 +43,7 @@ function Hero() {
             </motion.h1>
 
             <motion.p
-              className="text-gray-300 text-lg max-w-2xl mx-auto lg:mx-0"
+              className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -56,15 +56,15 @@ function Hero() {
           </div>
 
           {/* Profile Image */}
-          <div className="relative flex justify-center items-center">
-            <div className="relative w-[300px] h-[300px] lg:w-[400px] lg:h-[400px]">
+          <div className="relative flex justify-center items-center mt-8 lg:mt-0">
+            <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px]">
               {/* Orbit animations */}
               <motion.div
                 className="absolute inset-0"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full" />
+                <div className="absolute -top-2 -right-2 w-3 h-3 sm:w-4 sm:h-4 bg-blue-500/20 rounded-full" />
               </motion.div>
 
               <motion.div
@@ -72,7 +72,7 @@ function Hero() {
                 animate={{ rotate: -360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               >
-                <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full" />
+                <div className="absolute -bottom-2 -left-2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500/20 rounded-full" />
               </motion.div>
 
               {/* Decorative circles */}
