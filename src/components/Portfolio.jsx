@@ -10,6 +10,7 @@ import {
   SiPython,
   SiReact,
   SiSqlite,
+  SiTailwindcss,
   SiWindows,
   SiYoutube
 } from 'react-icons/si';
@@ -51,7 +52,7 @@ function Portfolio() {
       ],
       links: {
         github: "https://github.com/Davidcrz14/DavcBot-Extension",
-        live: "#"
+        live: null
       },
       color: "from-indigo-500/20 to-blue-500/20",
       category: "Browser Extensions"
@@ -67,7 +68,7 @@ function Portfolio() {
       ],
       links: {
         github: "https://github.com/Davidcrz14/appp",
-        live: "#"
+        live: null
       },
       color: "from-cyan-500/20 to-blue-500/20",
       category: "Mobile Apps"
@@ -83,7 +84,7 @@ function Portfolio() {
       ],
       links: {
         github: "https://github.com/Davidcrz14/DavLoad",
-        live: "#"
+        live: null
       },
       color: "from-red-500/20 to-orange-500/20",
       category: "Desktop Apps"
@@ -99,7 +100,7 @@ function Portfolio() {
       ],
       links: {
         github: "https://github.com/Davidcrz14/Foro",
-        live: "#"
+        live: null
       },
       color: "from-green-500/20 to-emerald-500/20",
       category: "Web Development"
@@ -115,10 +116,41 @@ function Portfolio() {
       ],
       links: {
         github: "https://github.com/Davidcrz14/davcalen",
-        live: "#"
+        live: null
       },
       color: "from-purple-500/20 to-pink-500/20",
       category: "Desktop Apps"
+    },
+    {
+      title: "Mi Blog Personal",
+      description: "Blog personal con diseño retro y minimalista, desarrollado con React y TailwindCSS",
+      image: "/images/blog.png",
+      technologies: [
+        { name: "React", icon: <SiReact className="text-[#61DAFB]" /> },
+        { name: "TailwindCSS", icon: <SiTailwindcss className="text-[#06B6D4]" /> }
+      ],
+      links: {
+        github: "https://github.com/Davidcrz14/blog",
+        live: "https://davcblog.vercel.app/"
+      },
+      color: "from-blue-500/20 to-indigo-500/20",
+      category: "Web Development"
+    },
+    {
+      title: "Scrypto Landing",
+      description: "Página web moderna para Scrypto Solutions con chatbot integrado usando Gemini AI",
+      image: "/images/landing.png",
+      technologies: [
+        { name: "React", icon: <SiReact className="text-[#61DAFB]" /> },
+        { name: "TailwindCSS", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
+        { name: "Google Cloud", icon: <SiGooglecloud className="text-[#4285F4]" /> }
+      ],
+      links: {
+        github: "https://github.com/Davidcrz14/landingScrypto",
+        live: "https://scryptolanding.vercel.app/"
+      },
+      color: "from-purple-500/20 to-blue-500/20",
+      category: "Web Development"
     }
   ];
 
@@ -286,17 +318,19 @@ function Portfolio() {
                       <FaGithub />
                       <span>Code</span>
                     </motion.a>
-                    <motion.a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FaExternalLinkAlt />
-                      <span>Demo</span>
-                    </motion.a>
+                    {project.links.live && (
+                      <motion.a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FaExternalLinkAlt />
+                        <span>Demo</span>
+                      </motion.a>
+                    )}
                   </div>
                 </div>
               </motion.div>

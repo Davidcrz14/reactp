@@ -419,7 +419,7 @@ function Certificates() {
 
                 <div className="text-center">
                     <motion.a
-                        href="https://platzi.com/p/davidmolina/"
+                        href="https://platzi.com/p/davidprofesor14/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-700 hover:to-purple-700 transition-colors"
