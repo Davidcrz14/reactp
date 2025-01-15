@@ -2,8 +2,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { motion } from 'framer-motion';
 import React, { Suspense, lazy } from 'react';
 import './App.css';
-import FloatingThemeButton from './components/FloatingThemeButton';
-import { ThemeProvider, useTheme } from './ThemeContext';
+//import FloatingThemeButton from './components/FloatingThemeButton';
+import { ThemeProvider } from './ThemeContext';
 
 // Lazy loading de componentes
 const Header = lazy(() => import('./components/Header'));
@@ -16,7 +16,6 @@ const Certificates = lazy(() => import('./components/Certificates'));
 const Footer = lazy(() => import('./components/Footer'));
 
 function LoadingSpinner() {
-  const { isChristmasTheme } = useTheme();
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -48,7 +47,6 @@ function AppContent() {
         </main>
         <Footer />
       </Suspense>
-      <FloatingThemeButton />
       <Analytics />
     </div>
   );
