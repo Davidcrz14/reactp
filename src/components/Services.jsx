@@ -1,61 +1,25 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FaDatabase, FaDiscord, FaMobile, FaRobot, FaServer } from 'react-icons/fa';
 import { HiCode } from 'react-icons/hi';
 
 const ServiceHexagon = ({ service, onHoverStart, onHoverEnd }) => {
   const isHovered = service.hovered;
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  useEffect(() => {
-    setIsTouchDevice('ontouchstart' in window);
-  }, []);
-
-  const handleTouchStart = () => {
-    if (isTouchDevice) {
-      onHoverStart();
-    }
-  };
-
-  useEffect(() => {
-    if (isTouchDevice && isHovered) {
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = 'auto';
-      };
-    }
-  }, [isTouchDevice, isHovered]);
-
-  const handleClickOutside = useCallback((e) => {
-    if (isTouchDevice && isHovered) {
-      const tooltip = document.querySelector('.service-tooltip');
-      const hexagon = document.querySelector('.service-hexagon');
-      if (!tooltip?.contains(e.target) && !hexagon?.contains(e.target)) {
-        onHoverEnd();
-      }
-    }
-  }, [isTouchDevice, isHovered, onHoverEnd]);
-
-  useEffect(() => {
-    if (isTouchDevice) {
-      document.addEventListener('touchstart', handleClickOutside, { passive: true });
-      return () => document.removeEventListener('touchstart', handleClickOutside);
-    }
-  }, [isTouchDevice, handleClickOutside]);
 
   return (
     <div className="relative">
       <motion.div
-        className="relative service-hexagon"
+        className="relative"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        onHoverStart={() => !isTouchDevice && onHoverStart()}
-        onHoverEnd={() => !isTouchDevice && onHoverEnd()}
-        onTouchStart={handleTouchStart}
+        onHoverStart={onHoverStart}
+        onHoverEnd={onHoverEnd}
+        onTouchStart={onHoverStart}
+        onTouchEnd={onHoverEnd}
       >
         <motion.div
-          className={`w-56 h-56 relative group cursor-pointer`}
+          className={`w-48 h-48 md:h-48 relative group cursor-pointer`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           transition={{ duration: 0.2 }}
@@ -78,7 +42,8 @@ const ServiceHexagon = ({ service, onHoverStart, onHoverEnd }) => {
             background: "#1a1a1a",
           }} />
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4">
+          {/* Contenido para Desktop */}
+          <div className="absolute inset-0 flex-col items-center justify-center z-10 p-4 hidden md:flex">
             <motion.div
               className="mb-2"
               animate={{ scale: isHovered ? 1.1 : 1 }}
@@ -87,26 +52,41 @@ const ServiceHexagon = ({ service, onHoverStart, onHoverEnd }) => {
               {service.icon}
             </motion.div>
             <h3 className="text-white text-sm font-bold text-center">{service.title}</h3>
-            <span className="md:hidden text-xs text-gray-400 mt-2">Presióname</span>
+          </div>
+
+          {/* Contenido para Móvil */}
+          <div className="absolute inset-0 flex flex-col items-center z-10 p-3 md:hidden">
+            <div className="flex items-center gap-2 mb-2">
+              {service.icon}
+              <h3 className="text-white text-sm font-bold">{service.title}</h3>
+            </div>
+            <p className="text-gray-400 text-[10px] mb-2 line-clamp-3">{service.description}</p>
+            <div className="flex flex-wrap gap-1 justify-center">
+              {service.features.slice(0, 3).map((feature) => (
+                <span
+                  key={feature}
+                  className="px-2 py-0.5 bg-gray-800/50 rounded-full text-[8px] text-gray-300"
+                >
+                  {feature}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </motion.div>
 
+      {/* Info expandida solo para Desktop */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
-            className="absolute z-20 w-72 bg-[#1a1a1a] rounded-2xl p-6 mt-4 border border-gray-800 shadow-xl service-tooltip"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
+            className="absolute z-20 w-72 bg-[#1a1a1a] rounded-2xl p-6 mt-4 border border-gray-800 shadow-xl hidden md:block"
             style={{
               left: '50%',
               transform: 'translateX(-50%)',
-              maxWidth: '90vw',
-              maxHeight: '90vh',
-              overflowY: 'auto',
-              top: '100%',
             }}
           >
             <motion.div
@@ -150,7 +130,7 @@ function Services() {
   const [services, setServices] = useState([
     {
       title: "Desarrollo Web",
-      description: "Creación de aplicaciones web modernas y responsivas utilizando las últimas tecnologías como React, TailwindCSS, Boostrap y más.",
+      description: "Creación de aplicaciones web modernas y responsivas utilizando las últimas tecnologías como React, TailwindCSS y más.",
       icon: <HiCode className="text-[#61DAFB] text-3xl" />,
       color: "from-blue-500/20 to-cyan-500/20",
       features: ["React.js", "TailwindCSS", "Responsive Design", "SEO Optimizado"],
@@ -210,15 +190,6 @@ function Services() {
     setServices(prevServices =>
       prevServices.map(service => ({ ...service, hovered: false }))
     );
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      handleHoverEnd();
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -288,7 +259,7 @@ function Services() {
                 <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
             </motion.div>
 
-            <div className="flex flex-wrap justify-center gap-12 max-w-6xl mx-auto pb-16">
+            <div className="flex flex-wrap justify-center gap-16 max-w-5xl mx-auto pb-32">
                 {services.map((service, index) => (
                     <MemoizedServiceHexagon
                         key={service.title}
