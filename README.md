@@ -2,7 +2,6 @@
 
 Un portafolio web moderno y responsivo desarrollado con React y Vite, que muestra mis habilidades, proyectos y experiencia como desarrollador Frontend.
 
-
 ## 🚀 Características
 
 - Diseño moderno y minimalista
@@ -25,17 +24,20 @@ Un portafolio web moderno y responsivo desarrollado con React y Vite, que muestr
 ## 📦 Instalación
 
 1. Clona el repositorio:
+
 ```bash
 git clone https://github.com/Davidcrz14/reactp
 ```
 
 2. Instala las dependencias:
+
 ```bash
 cd reactp
 npm install
 ```
 
 3. Inicia el servidor de desarrollo:
+
 ```bash
 npm run dev
 ```
@@ -52,6 +54,7 @@ npm run dev
 ## 📱 Responsive Design
 
 El portafolio está optimizado para diferentes tamaños de pantalla:
+
 - Móvil (< 768px)
 - Tablet (768px - 1024px)
 - Desktop (> 1024px)
@@ -91,8 +94,8 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 - **David Cruz**
 - GitHub: [@Davidcrz14](https://github.com/Davidcrz14)
-- LinkedIn: [David Cruz](https://www.linkedin.com/in/david-cruz-cruz-406179324/)
-
+- LinkedIn: [David](https://www.linkedin.com/in/davcrz/)
 
 ---
+
 Desarrollado con ❤️ por David Cruz

@@ -48,10 +48,10 @@ function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Soy estudiante de Ingeniería en Computación, apasionado por la tecnología y la programación.
+            Estudiante de Ingeniería en Computación, apasionado por la tecnología y la programación.
               Disfruto trabajar en equipo y resolver problemas que afectan a la sociedad mediante el desarrollo
-              de software que facilite la vida de los usuarios. Vivo en Oaxaca de Juárez, tengo 18 años y me
-              gusta practicar deportes, dibujar y diseñar.
+              de software que facilite la vida de los usuarios.Tengo 18 años y me gusta practicar deportes, dibujar y diseñar.
+
             </motion.p>
           </div>
 

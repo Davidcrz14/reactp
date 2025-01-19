@@ -14,7 +14,7 @@ const socialLinks = [
     {
         name: 'LinkedIn',
         icon: <FaLinkedin className="text-[#0077B5] text-2xl" />,
-        url: 'https://www.linkedin.com/in/david-cruz-cruz-406179324/',
+        url: 'https://www.linkedin.com/in/davcrz/',
         description: 'Conectemos profesionalmente',
         color: 'from-blue-500/20 to-cyan-500/20'
     },
