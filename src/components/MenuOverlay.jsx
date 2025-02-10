@@ -172,12 +172,12 @@ const MenuOverlay = ({ isOpen, onClose }) => {
                                 </div>
                             </button>
 
-                            <div className="mt-16">
+                            <div className="mt-16 flex flex-col items-center">
                                 <div className="flex flex-col items-center gap-4 mb-8">
                                     <h2 className="text-3xl font-bold text-white">Informacion de contacto</h2>
                                 </div>
 
-                                <div className="flex justify-center mt-8">
+                                <div className="mt-8">
                                     <SocialIcons />
                                 </div>
                             </div>
