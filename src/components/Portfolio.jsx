@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import React, { useRef } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { FaDesktop, FaExternalLinkAlt, FaGithub, FaMobileAlt, FaServer } from 'react-icons/fa';
 import {
   SiFirebase,
@@ -15,6 +15,124 @@ import {
   SiYoutube
 } from 'react-icons/si';
 
+// Componente de proyecto optimizado con memoización
+const ProjectCard = React.memo(({ project, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="group relative h-full"
+    >
+      <motion.div
+        whileHover={{ y: -5 }}
+        className="relative bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 h-full flex flex-col shadow-lg hover:shadow-xl transition-all duration-300"
+      >
+        <div className="relative h-[200px] overflow-hidden">
+          <motion.div
+            className="absolute inset-0"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
+          </motion.div>
+
+          <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-gray-800/80 backdrop-blur-sm text-xs text-gray-300">
+            {project.category}
+          </div>
+        </div>
+
+        <div className="p-6 flex flex-col flex-grow">
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{project.title}</h3>
+          <p className="text-gray-400 text-sm mb-4 flex-grow">{project.description}</p>
+
+          <div className="flex flex-wrap gap-3 mb-4">
+            {project.technologies.map((tech) => (
+              <motion.div
+                key={tech.name}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/50 text-sm"
+              >
+                {tech.icon}
+                <span className="text-gray-300">{tech.name}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <motion.a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaGithub />
+              <span>Code</span>
+            </motion.a>
+            {project.links.live && (
+              <motion.a
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaExternalLinkAlt />
+                <span>Demo</span>
+              </motion.a>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+});
+
+// Componente de filtro de categoría
+const CategoryFilter = React.memo(({ categories, activeCategory, setActiveCategory }) => {
+  return (
+    <div className="flex flex-wrap justify-center gap-4 mb-12">
+      <motion.button
+        key="all"
+        className={`px-4 py-2 rounded-full ${activeCategory === 'all'
+          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+          : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'}
+          transition-colors text-sm font-medium`}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setActiveCategory('all')}
+      >
+        Todos
+      </motion.button>
+
+      {categories.map((category) => (
+        <motion.button
+          key={category}
+          className={`px-4 py-2 rounded-full ${activeCategory === category
+            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+            : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'}
+            transition-colors text-sm font-medium`}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setActiveCategory(category)}
+        >
+          {category}
+        </motion.button>
+      ))}
+    </div>
+  );
+});
+
 function Portfolio() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -25,7 +143,9 @@ function Portfolio() {
   const y = useTransform(scrollYProgress, [0, 1], [-100, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
-  const projects = [
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const projects = useMemo(() => [
     {
       title: "DavGenerator",
       description: "Analizador de Pseudocódigo potenciado con IA Gemini 1.5, usando técnicas de Prompt Tuning para validaciones de código en formato Markdown",
@@ -152,37 +272,52 @@ function Portfolio() {
       color: "from-purple-500/20 to-blue-500/20",
       category: "Web Development"
     }
-  ];
+  ], []);
 
-  const categories = [...new Set(projects.map(p => p.category))];
+  const categories = useMemo(() =>
+    ['all', ...new Set(projects.map(p => p.category))],
+    [projects]
+  );
+
+  const filteredProjects = useMemo(() =>
+    activeCategory === 'all'
+      ? projects
+      : projects.filter(project => project.category === activeCategory),
+    [projects, activeCategory]
+  );
+
+  // Función para generar elementos decorativos
+  const generateDecorations = useCallback((count) => {
+    return Array.from({ length: count }).map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        initial={{ scale: 0, rotate: 0 }}
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 90, 0],
+        }}
+        transition={{
+          duration: 4,
+          delay: i * 0.1,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      >
+        <div className="w-4 h-4 border border-gray-700 transform rotate-45" />
+      </motion.div>
+    ));
+  }, []);
 
   return (
     <section ref={containerRef} id="projects" className="py-32 relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0">
-          {Array.from({ length: 50 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              initial={{ scale: 0, rotate: 0 }}
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 90, 0],
-              }}
-              transition={{
-                duration: 4,
-                delay: i * 0.1,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            >
-              <div className="w-4 h-4 border border-gray-700 transform rotate-45" />
-            </motion.div>
-          ))}
+          {generateDecorations(50)}
         </div>
 
         <div className="absolute inset-0">
@@ -243,98 +378,15 @@ function Portfolio() {
           <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              className="px-4 py-2 rounded-full bg-gray-800/50 text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category}
-            </motion.button>
-          ))}
-        </div>
+        <CategoryFilter
+          categories={categories.filter(c => c !== 'all')}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative h-full"
-            >
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="relative bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 h-full flex flex-col"
-              >
-                <div className="relative h-[200px] overflow-hidden">
-                  <motion.div
-                    className="absolute inset-0"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
-                  </motion.div>
-
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-gray-800/80 backdrop-blur-sm text-xs text-gray-300">
-                    {project.category}
-                  </div>
-                </div>
-
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4 flex-grow">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    {project.technologies.map((tech) => (
-                      <motion.div
-                        key={tech.name}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/50 text-sm"
-                      >
-                        {tech.icon}
-                        <span className="text-gray-300">{tech.name}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <motion.a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FaGithub />
-                      <span>Code</span>
-                    </motion.a>
-                    {project.links.live && (
-                      <motion.a
-                        href={project.links.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaExternalLinkAlt />
-                        <span>Demo</span>
-                      </motion.a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
       </div>
@@ -342,4 +394,4 @@ function Portfolio() {
   );
 }
 
-export default Portfolio;
+export default React.memo(Portfolio);
