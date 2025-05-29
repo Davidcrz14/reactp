@@ -230,7 +230,7 @@ function Hero() {
                 whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src="/images/W.jpg"
+                  src="/images/W.webp"
                   alt="Developer Profile"
                   className="w-full h-full object-cover rounded-full"
                 />

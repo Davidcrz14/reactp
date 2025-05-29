@@ -143,9 +143,11 @@ const SocialIcons = memo(() => {
               <div className={`social-bg ${social.bgClass}`} />
               <div className="social-icon">{social.icon}</div>
             </a>
-            <div className="social-tooltip" style={{ backgroundColor: social.bgClass === 'github-bg' ? '#24292e' :
-                                                    social.bgClass === 'linkedin-bg' ? '#0a66c2' :
-                                                    social.bgClass === 'twitter-bg' ? '#1da1f2' : '#ea4335' }}>
+            <div className="social-tooltip" style={{
+              backgroundColor: social.bgClass === 'github-bg' ? '#24292e' :
+                social.bgClass === 'linkedin-bg' ? '#0a66c2' :
+                  social.bgClass === 'twitter-bg' ? '#1da1f2' : '#ea4335'
+            }}>
               {social.name}
             </div>
           </div>
@@ -215,7 +217,7 @@ const MenuOverlay = ({ isOpen, onClose }) => {
                 >
                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gray-700">
                     <img
-                      src="/images/W.jpg"
+                      src="/images/W.webp"
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />
