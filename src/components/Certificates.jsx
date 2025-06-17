@@ -1,23 +1,9 @@
-import { motion, useScroll } from 'framer-motion';
-import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import React from 'react';
 import { FaAward, FaCode, FaExternalLinkAlt, FaNodeJs, FaReact } from 'react-icons/fa';
 import { SiCss3, SiHtml5, SiMysql } from 'react-icons/si';
 
 function Certificates() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
-
-    useEffect(() => {
-        return () => {
-            const elements = document.querySelectorAll('.animate-cleanup');
-            elements.forEach(element => {
-                element.getAnimations().forEach(animation => animation.cancel());
-            });
-        };
-    }, []);
 
     const certificates = [
         {
@@ -152,138 +138,55 @@ function Certificates() {
     };
 
     return (
-        <section ref={containerRef} id="certificates" className="py-32 relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] gap-4 opacity-10">
-                    {Array.from({ length: 100 }).map((_, i) => (
+        <section id="certificates" className="py-20 relative overflow-hidden">
+            {/* Elementos decorativos de fondo */}
+            <div className="absolute inset-0">
+                {/* Patrón de puntos */}
+                <div className="absolute inset-0">
+                    {Array.from({ length: 50 }).map((_, i) => (
                         <motion.div
                             key={i}
-                            className="w-1 h-1 bg-gray-500 rounded-full"
+                            className="absolute"
+                            style={{
+                                left: `${Math.random() * 100}%`,
+                                top: `${Math.random() * 100}%`,
+                            }}
+                            initial={{ scale: 0, rotate: 0 }}
                             animate={{
-                                scale: [1, 1.5, 1],
-                                opacity: [0.3, 0.7, 0.3],
+                                scale: [1, 1.2, 1],
+                                rotate: [0, 90, 0],
                             }}
                             transition={{
-                                duration: 2,
-                                delay: i * 0.01,
+                                duration: 4,
+                                delay: i * 0.1,
                                 repeat: Infinity,
+                                repeatType: "reverse"
                             }}
-                        />
+                        >
+                            <div className="w-4 h-4 border border-gray-700 transform rotate-45" />
+                        </motion.div>
                     ))}
                 </div>
 
+                {/* Líneas animadas */}
                 <svg className="absolute inset-0 w-full h-full">
                     <motion.path
-                        d="M0,200 C150,150 300,250 450,200 S600,150 800,200"
-                        stroke="url(#gradient-purple)"
-                        strokeWidth="1"
+                        d="M0,100 Q200,200 400,100 Q600,0 800,100"
+                        stroke="url(#gradient-certificates)"
+                        strokeWidth="2"
                         fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 2, ease: "easeInOut" }}
-                    />
-                    <motion.path
-                        d="M0,300 C200,250 400,350 600,300 S800,250 1000,300"
-                        stroke="url(#gradient-teal)"
-                        strokeWidth="1"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2, repeat: Infinity, repeatType: "loop" }}
                     />
                     <defs>
-                        <linearGradient id="gradient-purple" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="rgba(168, 85, 247, 0)" />
-                            <stop offset="50%" stopColor="rgba(168, 85, 247, 0.5)" />
-                            <stop offset="100%" stopColor="rgba(168, 85, 247, 0)" />
-                            <animate attributeName="x1" from="-100%" to="100%" dur="4s" repeatCount="indefinite" />
-                            <animate attributeName="x2" from="0%" to="200%" dur="4s" repeatCount="indefinite" />
-                        </linearGradient>
-                        <linearGradient id="gradient-teal" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="rgba(45, 212, 191, 0)" />
-                            <stop offset="50%" stopColor="rgba(45, 212, 191, 0.5)" />
-                            <stop offset="100%" stopColor="rgba(45, 212, 191, 0)" />
-                            <animate attributeName="x1" from="-100%" to="100%" dur="4s" repeatCount="indefinite" />
-                            <animate attributeName="x2" from="0%" to="200%" dur="4s" repeatCount="indefinite" />
+                        <linearGradient id="gradient-certificates" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="rgba(99, 102, 241, 0)" />
+                            <stop offset="50%" stopColor="rgba(99, 102, 241, 1)" />
+                            <stop offset="100%" stopColor="rgba(99, 102, 241, 0)" />
                         </linearGradient>
                     </defs>
                 </svg>
-
-                <motion.div
-                    className="absolute top-20 right-20 block"
-                    animate={{
-                        rotate: 360,
-                        scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
-                >
-                    <div className="w-32 h-32 border-2 border-purple-500/20 rounded-full" />
-                </motion.div>
-
-                <motion.div
-                    className="absolute bottom-20 left-20 block"
-                    animate={{
-                        rotate: -360,
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
-                >
-                    <div className="w-24 h-24 relative">
-                        <motion.div
-                            className="absolute inset-0"
-                            style={{
-                                clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-                            }}
-                            animate={{
-                                backgroundColor: ["rgba(99,102,241,0.1)", "rgba(168,85,247,0.1)", "rgba(99,102,241,0.1)"],
-                            }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                            }}
-                        />
-                    </div>
-                </motion.div>
-
-                {Array.from({ length: 5 }).map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 bg-gray-500/20 rounded-full block"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                        }}
-                        animate={{
-                            y: [0, -30, 0],
-                            opacity: [0.2, 0.5, 0.2],
-                        }}
-                        transition={{
-                            duration: 3 + i,
-                            repeat: Infinity,
-                            delay: i * 0.5,
-                        }}
-                    />
-                ))}
-
-                <motion.div
-                    className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-700/20 to-transparent"
-                    animate={{
-                        scaleX: [0.5, 1.5, 0.5],
-                        x: [-100, 100, -100],
-                    }}
-                    transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                />
             </div>
 
             <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -294,141 +197,248 @@ function Certificates() {
                     className="flex items-center gap-4 mb-12"
                 >
                     <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
+                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
                             <span className="text-3xl">🎓</span>
-                            <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500/20 rounded-full animate-pulse"></div>
-                            <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse delay-150"></div>
                         </div>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">CERTIFICATES</h2>
                     </div>
                     <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                    {certificates.map((certificate, index) => (
+                {/* Grid Asimétrico para Certificados Principales */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
+                    {/* Certificado destacado - ocupa más espacio */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="lg:col-span-7 relative"
+                    >
                         <motion.div
-                            key={certificate.title}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="relative"
+                            whileHover={{ y: -4 }}
+                            className="bg-[#1a1a1a] rounded-3xl p-8 border border-gray-800 h-full relative"
                         >
-                            <motion.div
-                                whileHover={{ y: -5 }}
-                                className="bg-[#1a1a1a] rounded-2xl p-6 border border-gray-800 h-full"
-                            >
-                                <div className="relative h-[200px] mb-6 overflow-hidden rounded-xl">
-                                    <img
-                                        src={certificate.image}
-                                        alt={certificate.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
-                                </div>
 
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
-                                        {certificate.icon}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-white">{certificate.title}</h3>
-                                        <p className="text-sm text-gray-400">{certificate.platform}</p>
-                                    </div>
+                            <div className="relative h-[280px] mb-8 overflow-hidden rounded-2xl">
+                                <img
+                                    src={certificates[0].image}
+                                    alt={certificates[0].title}
+                                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent" />
+                                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white">
+                                    ⭐ Destacado
                                 </div>
+                            </div>
 
-                                <div className="space-y-4">
-                                    <p className="text-gray-400">{certificate.description}</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {certificate.skills.map((skill) => (
-                                            <motion.div
-                                                key={skill}
-                                                whileHover={{ scale: 1.1, rotate: 5 }}
-                                                className="px-3 py-1 rounded-full bg-gray-800/50 text-sm text-gray-300"
-                                            >
-                                                {skill}
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                    <div className="text-sm text-gray-500">
-                                        <p>{certificate.credential}</p>
-                                        <p>{certificate.duration}</p>
-                                    </div>
+                            <div className="flex items-center gap-6 mb-8">
+                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center border border-orange-500/30">
+                                    {certificates[0].icon}
                                 </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-white mb-2">{certificates[0].title}</h3>
+                                    <p className="text-gray-400 font-medium">{certificates[0].platform}</p>
+                                    <p className="text-sm text-gray-500">{certificates[0].date} • {certificates[0].duration}</p>
+                                </div>
+                            </div>
 
-                                <div className="mt-6">
-                                    <motion.a
-                                        href={certificate.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 transition-colors"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <FaExternalLinkAlt />
-                                        <span>Ver certificado</span>
-                                    </motion.a>
+                            <div className="space-y-6">
+                                <p className="text-gray-300 text-lg leading-relaxed">{certificates[0].description}</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {certificates[0].skills.map((skill) => (
+                                        <div
+                                            key={skill}
+                                            className="px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 text-sm text-orange-200 font-medium"
+                                        >
+                                            {skill}
+                                        </div>
+                                    ))}
                                 </div>
-                            </motion.div>
+                                <div className="text-sm text-gray-400 bg-gray-800/30 rounded-lg p-4">
+                                    <p className="font-mono">{certificates[0].credential}</p>
+                                </div>
+                            </div>
+
+                            <div className="mt-8">
+                                <a
+                                    href={certificates[0].link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-600 to-red-600 text-white font-medium hover:from-orange-700 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-orange-500/25"
+                                >
+                                    <FaExternalLinkAlt />
+                                    <span>Ver certificado</span>
+                                </a>
+                            </div>
                         </motion.div>
-                    ))}
+                    </motion.div>
+
+                    {/* Columna derecha con certificados más pequeños */}
+                    <div className="lg:col-span-5 space-y-6">
+                        {certificates.slice(1).map((certificate, index) => (
+                            <motion.div
+                                key={certificate.title}
+                                initial={{ opacity: 0, x: 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: (index + 1) * 0.15 }}
+                                className="relative"
+                            >
+                                <motion.div
+                                    whileHover={{ y: -2 }}
+                                    className={`bg-gradient-to-br ${certificate.color} backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 h-full relative`}
+                                >
+
+                                    <div className="flex items-start gap-4 mb-4">
+                                        <div className="w-12 h-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center border border-white/10">
+                                            {certificate.icon}
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-bold text-white mb-1 leading-tight">{certificate.title}</h3>
+                                            <p className="text-sm text-gray-300">{certificate.platform}</p>
+                                            <p className="text-xs text-gray-400">{certificate.date} • {certificate.duration}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <p className="text-gray-200 text-sm leading-relaxed">{certificate.description}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {certificate.skills.map((skill) => (
+                                                <div
+                                                    key={skill}
+                                                    className="px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm text-xs text-white border border-white/10"
+                                                >
+                                                    {skill}
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="text-xs text-gray-300 bg-black/20 rounded-lg p-3">
+                                            <p className="font-mono">{certificate.credential}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <a
+                                            href={certificate.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black/30 backdrop-blur-sm text-white hover:bg-black/40 transition-all duration-300 border border-white/10 text-sm"
+                                        >
+                                            <FaExternalLinkAlt className="text-xs" />
+                                            <span>Ver certificado</span>
+                                        </a>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    {platziCourses.map((course, index) => (
-                        <motion.div
-                            key={course.title}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="relative"
-                        >
-                            <motion.div
-                                whileHover={{ y: -5 }}
-                                className="bg-[#1a1a1a] rounded-2xl p-6 border border-gray-800 h-full"
-                            >
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
-                                        {course.icon}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-white">{course.title}</h3>
-                                        <p className="text-sm text-gray-400">{course.platform}</p>
-                                    </div>
-                                </div>
+                {/* Grid Asimétrico para Cursos de Platzi */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="flex items-center gap-4 mb-12"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                            <span className="text-3xl">📚</span>
+                        </div>
+                        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">COURSES PLATZI</h3>
+                    </div>
+                    <div className="hidden sm:block h-[2px] flex-grow bg-gradient-to-r from-gray-700 via-gray-600 to-transparent"></div>
+                </motion.div>
 
-                                <div className="space-y-4">
-                                    <p className="text-gray-400">{course.description}</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {course.skills.map((skill) => (
-                                            <motion.div
-                                                key={skill}
-                                                whileHover={{ scale: 1.1, rotate: 5 }}
-                                                className="px-3 py-1 rounded-full bg-gray-800/50 text-sm text-gray-300"
-                                            >
-                                                {skill}
-                                            </motion.div>
-                                        ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    {platziCourses.map((course, index) => {
+                        // Crear un patrón asimétrico para las alturas
+                        const isLarge = index === 0 || index === 3;
+                        const colSpan = isLarge ? "md:col-span-2 lg:col-span-2" : "md:col-span-1 lg:col-span-1";
+
+                        return (
+                            <motion.div
+                                key={course.title}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className={`relative ${colSpan}`}
+                            >
+                                <motion.div
+                                    whileHover={{ y: -4 }}
+                                    className={`bg-gradient-to-br ${course.color} backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 h-full relative`}
+                                    style={{
+                                        minHeight: isLarge ? "280px" : "220px"
+                                    }}
+                                >
+
+                                    {/* Indicador de tamaño */}
+                                    {isLarge && (
+                                        <div className="absolute top-4 right-4 bg-blue-500/20 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-blue-200 border border-blue-500/30">
+                                            ⚡ Destacado
+                                        </div>
+                                    )}
+
+                                    <div className={`flex ${isLarge ? 'flex-col' : 'flex-row'} items-start gap-4 mb-6`}>
+                                        <div className={`${isLarge ? 'w-16 h-16' : 'w-12 h-12'} rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center border border-white/10 flex-shrink-0`}>
+                                            {course.icon}
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className={`${isLarge ? 'text-xl' : 'text-lg'} font-bold text-white mb-2 leading-tight`}>
+                                                {course.title}
+                                            </h3>
+                                            <p className="text-sm text-gray-300 mb-1">{course.platform}</p>
+                                            <p className="text-xs text-gray-400">{course.date}</p>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <div className="space-y-4">
+                                        <p className={`text-gray-200 ${isLarge ? 'text-base' : 'text-sm'} leading-relaxed`}>
+                                            {course.description}
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {course.skills.map((skill) => (
+                                                <div
+                                                    key={skill}
+                                                    className="px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm text-xs text-white border border-white/10"
+                                                >
+                                                    {skill}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {isLarge && (
+                                        <div className="mt-6">
+                                            <a
+                                                href={course.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black/30 backdrop-blur-sm text-white hover:bg-black/40 transition-all duration-300 border border-white/10 text-sm"
+                                            >
+                                                <FaExternalLinkAlt className="text-xs" />
+                                                <span>Ver curso</span>
+                                            </a>
+                                        </div>
+                                    )}
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 <div className="text-center">
-                    <motion.a
+                    <a
                         href="https://platzi.com/p/davidprofesor14/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-700 hover:to-purple-700 transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                     >
                         <FaExternalLinkAlt />
                         <span>Ver perfil en Platzi</span>
-                    </motion.a>
+                    </a>
                 </div>
             </div>
         </section>

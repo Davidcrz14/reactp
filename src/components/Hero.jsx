@@ -139,7 +139,7 @@ function Hero() {
             >
               Estudiante de Ingeniería en Computación, apasionado por la tecnología y la programación.
               Disfruto trabajar en equipo y resolver problemas que afectan a la sociedad mediante el desarrollo
-              de software que facilite la vida de los usuarios. Tengo 18 años y me gusta practicar deportes, dibujar y diseñar.
+              de software que facilite la vida de los usuarios. Tengo 19 años y me gusta hacer ejercicio, dibujar, jugar videojuegos y programar.
             </motion.p>
 
             <motion.div
