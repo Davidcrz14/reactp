@@ -7,10 +7,12 @@ import {
   SiGooglechrome,
   SiGooglecloud,
   SiMarkdown,
+  SiNodedotjs,
   SiPython,
   SiReact,
   SiSqlite,
   SiTailwindcss,
+  SiWhatsapp,
   SiWindows,
   SiYoutube
 } from 'react-icons/si';
@@ -146,6 +148,22 @@ function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const projects = useMemo(() => [
+    {
+      title: "Bot WhatsApp con IA",
+      description: "Bot de WhatsApp que simula conversaciones naturales usando Gemini AI. Incluye personalidad mexicana casual, respuestas cortas y sistema de perfiles personalizable",
+      image: "/images/bot.webp",
+      technologies: [
+        { name: "Node.js", icon: <SiNodedotjs className="text-[#339933]" /> },
+        { name: "WhatsApp", icon: <SiWhatsapp className="text-[#25D366]" /> },
+        { name: "Google Cloud", icon: <SiGooglecloud className="text-[#4285F4]" /> }
+      ],
+      links: {
+        github: "https://github.com/Davidcrz14/bot-wsp",
+        live: null
+      },
+      color: "from-green-500/20 to-emerald-500/20",
+      category: "AI & Development Tools"
+    },
     {
       title: "DavGenerator",
       description: "Analizador de Pseudocódigo potenciado con IA Gemini 1.5, usando técnicas de Prompt Tuning para validaciones de código en formato Markdown",
