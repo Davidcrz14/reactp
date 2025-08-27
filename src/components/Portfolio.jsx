@@ -17,7 +17,6 @@ import {
   SiYoutube
 } from 'react-icons/si';
 
-// Componente de proyecto optimizado con memoización
 const ProjectCard = React.memo(({ project, index }) => {
   return (
     <motion.div
@@ -100,7 +99,6 @@ const ProjectCard = React.memo(({ project, index }) => {
   );
 });
 
-// Componente de filtro de categoría
 const CategoryFilter = React.memo(({ categories, activeCategory, setActiveCategory }) => {
   return (
     <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -149,8 +147,8 @@ function Portfolio() {
 
   const projects = useMemo(() => [
     {
-      title: "Bot WhatsApp con IA",
-      description: "Bot de WhatsApp que simula conversaciones naturales usando Gemini AI. Incluye personalidad mexicana casual, respuestas cortas y sistema de perfiles personalizable",
+      title: "WhatsApp Bot v2.0 - Arquitectura Modular",
+      description: "Bot de WhatsApp con arquitectura modular mejorada, diseñado para mayor escalabilidad y mantenimiento. Incluye sistema de plugins y configuración avanzada",
       image: "/images/bot.webp",
       technologies: [
         { name: "Node.js", icon: <SiNodedotjs className="text-[#339933]" /> },
@@ -163,6 +161,38 @@ function Portfolio() {
       },
       color: "from-green-500/20 to-emerald-500/20",
       category: "AI & Development Tools"
+    },
+    {
+      title: "Nova Terminal",
+      description: "Terminal moderna para Windows inspirada en Warp, desarrollada con Electron, Node.js y xterm.js. Cuenta con interfaz atractiva y funcionalidades inteligentes (En desarrollo)",
+      image: "/images/nova.jpg",
+      technologies: [
+        { name: "Node.js", icon: <SiNodedotjs className="text-[#339933]" /> },
+        { name: "React", icon: <SiReact className="text-[#61DAFB]" /> },
+        { name: "Windows", icon: <SiWindows className="text-[#0078D6]" /> }
+      ],
+      links: {
+        github: "https://github.com/Davidcrz14/Nova",
+        live: null
+      },
+      color: "from-purple-500/20 to-indigo-500/20",
+      category: "Desktop Apps"
+    },
+    {
+      title: "DaizenClear",
+      description: "Sistema avanzado de limpieza en múltiples fases que libera más memoria que las soluciones convencionales. Optimiza el rendimiento del sistema de manera eficiente",
+      image: "/images/clean.png",
+      technologies: [
+        { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
+        { name: "Windows", icon: <SiWindows className="text-[#0078D6]" /> },
+        { name: "Desktop", icon: <FaDesktop className="text-[#333333]" /> }
+      ],
+      links: {
+        github: "https://github.com/Davidcrz14/DaizenClear",
+        live: null
+      },
+      color: "from-cyan-500/20 to-blue-500/20",
+      category: "Desktop Apps"
     },
     {
       title: "DavGenerator",
