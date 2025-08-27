@@ -227,10 +227,14 @@ function Hero() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.2, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.98 }}
               >
                 <img
-                  src="/images/W.webp"
+                  src="/images/yo.webp"
                   alt="Developer Profile"
                   className="w-full h-full object-cover rounded-full"
                 />

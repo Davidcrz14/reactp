@@ -1,56 +1,78 @@
 import { Analytics } from '@vercel/analytics/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import './App.css';
 import { ThemeProvider, useTheme } from './ThemeContext';
 //import FloatingThemeButton from './components/FloatingThemeButton';
 
-// Componente de carga optimizado
+// Componente de carga optimizado - más liviano
 const LoadingSpinner = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-[#121212]">
       <div className="relative">
         <motion.div
-          className="rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"
+          className="rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
           animate={{ rotate: 360 }}
           transition={{
-            duration: 1,
+            duration: 0.8, // Más rápido
             repeat: Infinity,
             ease: 'linear',
           }}
         />
-        <motion.div
-          className="absolute inset-0 rounded-full h-16 w-16 border-r-2 border-l-2 border-purple-500"
-          animate={{ rotate: -360 }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
+        <motion.p
+          className="text-white mt-4 text-sm" // Texto más pequeño
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }} // Delay reducido
+        >
+
+        </motion.p>
       </div>
-      <motion.p
-        className="text-white ml-4 text-lg"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        Cargando...
-      </motion.p>
     </div>
   );
 };
 
-// Lazy loading de componentes con prefetch
+// Lazy loading optimizado - componentes críticos cargados primero
 const Header = lazy(() => import('./components/Header'));
 const Hero = lazy(() => import('./components/Hero'));
-const Skills = lazy(() => import('./components/Skills'));
-const Services = lazy(() => import('./components/Services'));
-const Education = lazy(() => import('./components/Education'));
-const Portfolio = lazy(() => import('./components/Portfolio'));
-const Certificates = lazy(() => import('./components/Certificates'));
-const Footer = lazy(() => import('./components/Footer'));
-const FloatingThemeButton = lazy(() => import('./components/FloatingThemeButton'));
+
+// Componentes no críticos con carga diferida más agresiva
+const Skills = lazy(() =>
+  import('./components/Skills').then(module => {
+    // Retraso de 500ms para mejorar FCP
+    return new Promise(resolve => setTimeout(() => resolve(module), 500));
+  })
+);
+const Services = lazy(() =>
+  import('./components/Services').then(module => {
+    return new Promise(resolve => setTimeout(() => resolve(module), 700));
+  })
+);
+const Education = lazy(() =>
+  import('./components/Education').then(module => {
+    return new Promise(resolve => setTimeout(() => resolve(module), 900));
+  })
+);
+const Portfolio = lazy(() =>
+  import('./components/Portfolio').then(module => {
+    return new Promise(resolve => setTimeout(() => resolve(module), 1100));
+  })
+);
+const Certificates = lazy(() =>
+  import('./components/Certificates').then(module => {
+    return new Promise(resolve => setTimeout(() => resolve(module), 1300));
+  })
+);
+const Footer = lazy(() =>
+  import('./components/Footer').then(module => {
+    return new Promise(resolve => setTimeout(() => resolve(module), 1500));
+  })
+);
+const FloatingThemeButton = lazy(() =>
+  import('./components/FloatingThemeButton').then(module => {
+    return new Promise(resolve => setTimeout(() => resolve(module), 300));
+  })
+);
 
 // Componente de scroll a arriba
 const ScrollToTop = () => {
@@ -99,10 +121,10 @@ const ScrollToTop = () => {
 
 // Componente principal de la aplicación
 function AppContent() {
-  const { isChristmasTheme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   return (
-    <div className={`min-h-screen ${isChristmasTheme ? 'christmas-theme' : ''}`} style={{ backgroundColor: '#121212' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#121212' }}>
       <Suspense fallback={<LoadingSpinner />}>
         <Header />
         <main>
